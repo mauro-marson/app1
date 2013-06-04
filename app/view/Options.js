@@ -25,6 +25,7 @@ Ext.define('GAS.view.Options', {
 
         items: [
             // This is the home page, just some simple html
+
             {
                 xtype: 'FornitoriNavigation',
                 title: 'Fornitori',
@@ -37,6 +38,7 @@ Ext.define('GAS.view.Options', {
                 iconCls: 'bookmarks',
                 cls: 'bookmarks'
             }
+
             /*{
              xtype: 'Ordini',
              title: 'Ordini',

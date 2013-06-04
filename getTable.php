@@ -7,6 +7,8 @@ include 'config.php';
 include 'checkSession.php';
 
 $table = strip_tags($_POST["tableName"]);
+$orderBy = strip_tags($_POST["orderBy"]);
+$where = strip_tags($_POST["where"]);
 
 $db_handle = mysql_connect($server, $user_name, $password);
 $db_found = mysql_select_db($database, $db_handle);
@@ -17,6 +19,14 @@ if ($db_found) {
     //$SQL = "SELECT * FROM gasstore_tbl" . $table . " LIMIT 366";
     //$SQL = "SELECT * FROM gasstore_tbl" . $table . " order by IDProdotto";
     $SQL = "SELECT * FROM GASSTORE_tbl" . $table;
+
+    if($where){
+        $SQL = $SQL . ' where ' . $where;
+        }
+    if($orderBy){
+        $SQL = $SQL .' order by ' . $orderBy ;
+        }
+
     $result = mysql_query($SQL);
 
     $rows = array();
@@ -47,7 +57,7 @@ if ($db_found) {
             $data = array('success' => true, 'data' => $rows);
             //$data = array('success' => true, $rows);
         } else {
-            $data = array('success' => false, 'message' => 'nessun record');
+            $data = array('success' => false, 'message' => 'nessun record con il seguente SQL: ' . $SQL);
         }
         echo json_encode($data);
     } catch (Exception $err) {

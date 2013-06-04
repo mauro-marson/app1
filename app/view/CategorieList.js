@@ -25,10 +25,15 @@ Ext.define('GAS.view.CategorieList', {
         grouped: true,
         indexBar: true,
         store: 'Categorie',
-        onItemDisclosure: /*function(){
-         console.log('Disclosure more info!');
-         },*/
-            true,
-        itemTpl: '<img src="http://www.gasmonastier.it/gasstore/allegati/{Image1}" height="50" width="100" />  {Titolo}'
+        onItemDisclosure: true,
+        itemTpl: /*
+         "<tpl if='Image ==1 '>"+
+         '<img src="http://www.gasmonastier.it/gasstore/allegati/{Image}" height="50" width="100" />  {Titolo}'+
+         '</tpl>'+
+         '<tpl else>'+
+         '<img src="http://www.gasmonastier.it/gasstore/allegati/noImage.jpg" height="50" width="100" />  {Titolo}'+
+         '</tpl>'
+         */
+            '<p> {Titolo}'
     }
 });

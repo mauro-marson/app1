@@ -138,8 +138,26 @@ Ext.define('GAS.controller.Ordini', {
     onDisclose: function (view, record, target, index, event) {
         console.log('Disclosure icon was tapped on the List');
         console.log(view, record, target, index, event);
-        Ext.Msg.alert('Clicked on the disclosure icon',
-            'il fornitore scelto è: ' + record.get('Titolo')
-        );
+//        Ext.Msg.alert('Clicked on the disclosure icon',
+//            'il fornitore scelto è: ' + record.get('Titolo')
+//        );
+
+        // qui devo fare la load dello store categorie filtrata per fornitore
+        // e mostrare la view delle categorie
+        var storeCategorie = Ext.data.StoreManager.get('Categorie');
+        var idNegozio = record.get('IDNegozio');
+        var where = 'IDNegozio=' + idNegozio;
+        storeCategorie.getProxy().extraParams.where = where;
+
+        storeCategorie.load(
+            {
+                callback: function (records, operation, success) {
+                    // do something after the load finishes
+                    if (success) {
+                        alert('categorie caricate');
+                    }
+                },
+                scope: this
+            });
     }
 });

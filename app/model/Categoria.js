@@ -21,8 +21,49 @@ Ext.define('GAS.model.Categoria', {
             { name: 'Titolo', type: 'string' },
             { name: 'Image', type: 'string' },
             { name: 'ImageT', type: 'string' },
-            { name: 'Ordine', type: 'int'    },
-            { name: 'IDNegozio', type: 'int'    }
-        ]
+            { name: 'Ordine', type: 'int' },
+            { name: 'IDNegozio', type: 'int' }
+        ],
+        proxy: {
+            type: 'ajax',
+            actionMethods: 'POST',
+            extraParams: {
+                tableName: 'Categorie',
+                orderBy: 'Titolo',
+                where: ''
+            },
+            api: {
+                read: 'getTable.php',
+                create: 'TODO/Create',
+                destroy: 'TODO/Delete',
+                update: 'TODO/Update'
+            },
+            reader: {
+                type: 'json',
+                rootProperty: 'data',
+                idProperty: 'IDCategoria',
+                successProperty: 'success',
+                messageProperty: 'message'
+            },
+            writer: {
+                type: 'json',
+                root: 'data',
+                encode: true,
+                writeAllFields: true
+            },
+            listeners: {
+                exception: function () {
+                    console.log("Exception on Categorie");
+                }
+            }
+        }
+    },
+    fullName: function () {
+        var d = this.data,
+            names = [
+                d.Titolo
+            ];
+        return names.join(" ");
     }
-});
+})
+;
