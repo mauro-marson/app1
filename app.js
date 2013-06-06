@@ -44,6 +44,7 @@ Ext.application({
     views: [
         'Main',
         'Ordini',
+        'Carrello',
         'Blog',
         'Contact',
         'Login',
@@ -53,19 +54,30 @@ Ext.application({
         'FornitoriDetail',
         'CategorieNavigation',
         'CategorieList',
-        'CategorieDetail'
+        'CategorieDetail',
+        'ProdottiNavigation',
+        'ProdottiList',
+        'ProdottiDetail',
+        'CarrelloNavigation',
+        'CarrelloList',
+        'CarrelloDetail'
+
 
 
     ],
 
     models: [
         'Fornitore',
-        'Categoria'
+        'Categoria',
+        'Prodotto',
+        'Carrello'
     ],
 
     stores: [
         'Fornitori',
-        'Categorie'
+        'Categorie',
+        'Prodotti',
+        'Carrello'
     ],
 
     profiles: [

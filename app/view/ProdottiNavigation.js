@@ -5,15 +5,15 @@
  * Time: 15.36
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GAS.view.FornitoriNavigation', {
+Ext.define('GAS.view.ProdottiNavigation', {
     extend: 'Ext.navigation.View',
-    alias: 'widget.FornitoriNavigation',
+    alias: 'widget.ProdottiNavigation',
     requires: [
-        'GAS.view.FornitoriList'
+        'GAS.view.ProdottiList'
     ],
     config: {
         fullscreen: true,
-        title: 'Fornitori',
+        title: 'Prodotti',
         navigationBar: {
             //ui: 'light',
             docked: 'top',
@@ -21,23 +21,19 @@ Ext.define('GAS.view.FornitoriNavigation', {
             items: [
                 {
                     xtype: 'button',
-                    text: 'Log Out',
-                    action: 'logout',
-                    align: 'left'
-                },
-                {
-                    xtype: 'button',
-                    action: 'userSetting',
-                    align: 'right',
-                    iconCls: 'settings'
+                    text: 'Categorie',
+                    action: 'categorie'
                 }
             ]
         },
         items: [
             {
-                xtype: 'FornitoriList'
-
+                xtype: 'ProdottiList'
             }
+// ,
+//            {
+//                xtype: 'ProdottiDetail'
+//            }
         ]
 
     }

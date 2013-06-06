@@ -8,16 +8,14 @@
 Ext.define('GAS.view.CategorieNavigation', {
     extend: 'Ext.navigation.View',
     alias: 'widget.CategorieNavigation',
-    //xtype: 'fornitorinavigation',
     requires: [
-        'GAS.view.CategorieList',
-        'GAS.view.CategorieDetail'
+        'GAS.view.CategorieList'
     ],
     config: {
-        useTitleForBackButtonText: true,
         fullscreen: true,
+        title: 'Categorie',
         navigationBar: {
-            ui: 'light',
+            //ui: 'light',
             docked: 'top',
             height: 40,
             items: [

@@ -13,17 +13,18 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('GAS.view.FornitoriList', {
+Ext.define('GAS.view.CarrelloList', {
     extend: 'Ext.List',
-    alias: 'widget.FornitoriList',
+    alias: 'widget.CarrelloList',
+    //xtype: 'fornitorilist',
     requires: [
-        'GAS.store.Fornitori'
+        'GAS.store.Carrello'
     ],
     config: {
-        title: 'Fornitori',
+        title: 'Carrello',
         grouped: true,
         indexBar: true,
-        store: 'Fornitori',
+        store: 'Carrello',
         onItemDisclosure: /*function(){
          console.log('Disclosure more info!');
          },*/

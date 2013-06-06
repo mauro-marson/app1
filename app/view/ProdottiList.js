@@ -13,21 +13,17 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('GAS.view.FornitoriList', {
+Ext.define('GAS.view.ProdottiList', {
     extend: 'Ext.List',
-    alias: 'widget.FornitoriList',
+    alias: 'widget.ProdottiList',
     requires: [
-        'GAS.store.Fornitori'
+        'GAS.store.Prodotti'
     ],
     config: {
-        title: 'Fornitori',
         grouped: true,
         indexBar: true,
-        store: 'Fornitori',
-        onItemDisclosure: /*function(){
-         console.log('Disclosure more info!');
-         },*/
-            true,
-        itemTpl: '<img src="http://www.gasmonastier.it/gasstore/allegati/{Image1}" height="50" width="100" />  {Titolo} - {DescrizioneBreve}'
+        store: 'Prodotti',
+        onItemDisclosure: true,
+        itemTpl: '<img src="http://www.gasmonastier.it/gasstore/allegati/{Image1}" height="50" width="100" />  {Titolo}'
     }
 });

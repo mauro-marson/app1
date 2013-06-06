@@ -16,7 +16,6 @@
 Ext.define('GAS.view.CategorieList', {
     extend: 'Ext.List',
     alias: 'widget.CategorieList',
-    //xtype: 'fornitorilist',
     requires: [
         'GAS.store.Categorie'
     ],

@@ -1,15 +1,17 @@
-Ext.define('GAS.store.Categorie', {
+Ext.define('GAS.store.Carrello', {
     extend: 'Ext.data.Store',
+
     requires: [
-        'GAS.model.Categoria'
+        'GAS.model.Carrello'
     ],
+
     config: {
-        model: 'GAS.model.Categoria',
+        model: 'GAS.model.Carrello',
         grouper: function (record) {
             return record.get('Titolo')[0];
         },
-        storeId: 'Categorie',
-        autoLoad: true,
+        storeId: 'Carrello',
+        autoLoad: false,
         autoSync: false,
         sorters: 'Titolo'
     }

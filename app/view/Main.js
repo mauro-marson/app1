@@ -44,10 +44,17 @@ Ext.define('GAS.view.Main', {
             {
                 xtype: 'Ordini',
                 title: 'Ordini',
-                iconCls: 'bookmarks',
-                cls: 'bookmarks'
+                iconCls: 'search',
+                cls: 'search'
             },
 
+            // Carrello Page
+            {
+                xtype: 'Carrello',
+                title: 'Carrello',
+                iconCls: 'organize',
+                cls: 'organize'
+            },
             // This is the recent blogs page. It uses a tree store to load its data from blog.json
             {
                 xtype: 'Blog',

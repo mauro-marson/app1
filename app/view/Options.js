@@ -20,23 +20,35 @@ Ext.define('GAS.view.Options', {
 
     config: {
 
-        fullscreen: true,
-        tabBarPosition: 'bottom',
+        //fullscreen: true,
+        //tabBarPosition: 'bottom',
 
         items: [
             // This is the home page, just some simple html
 
             {
-                xtype: 'FornitoriNavigation',
-                title: 'Fornitori',
-                iconCls: 'bookmarks',
-                cls: 'bookmarks'
+                xtype: 'FornitoriNavigation'
+//                ,
+//                title: 'Fornitori',
+//                iconCls: 'bookmarks',
+//                cls: 'bookmarks'
             },
             {
-                xtype: 'CategorieNavigation',
-                title: 'Categorie',
-                iconCls: 'bookmarks',
-                cls: 'bookmarks'
+                xtype: 'CategorieNavigation'
+//                ,
+//                title: 'Categorie',
+//                iconCls: 'bookmarks',
+//                cls: 'bookmarks'
+            },
+            {
+                xtype: 'ProdottiNavigation'
+//                ,
+//                title: 'Prodotti',
+//                iconCls: 'bookmarks',
+//                cls: 'bookmarks'
+            },
+            {
+                xtype: 'ProdottiDetail'
             }
 
             /*{
