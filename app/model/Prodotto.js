@@ -42,7 +42,7 @@ Ext.define('GAS.model.Prodotto', {
             type: 'ajax',
             actionMethods: 'POST',
             extraParams: {
-                tableName: 'prodotti',
+                tableName: 'Prodotti',
                 orderBy: 'Titolo',
                 where: ''
             },

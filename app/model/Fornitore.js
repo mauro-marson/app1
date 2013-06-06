@@ -38,7 +38,7 @@ Ext.define('GAS.model.Fornitore', {
             extraParams: {
                 tableName: 'Negozi',
                 orderBy: 'Titolo',
-                where: ''
+                where: null
             },
             api: {
                 read: ' getTable.php',

@@ -9,7 +9,7 @@ Ext.define('GAS.store.Categorie', {
             return record.get('Titolo')[0];
         },
         storeId: 'Categorie',
-        autoLoad: true,
+        autoLoad: false,
         autoSync: false,
         sorters: 'Titolo'
     }

@@ -12,63 +12,44 @@ Ext.define('GAS.view.ProdottiDetail', {
         fullscreen: true,
         items: [
             {
-                xtype: 'titlebar',
-                title: 'FormPanel example',
-                docked: 'top',
-                items: [
-                    {
-                        xtype: 'button',
-                        text: 'Prodotti',
-                        action: 'prodotti',
-                        align: 'left'
-                    }
-                ]
-            },
-            {
                 xtype: 'fieldset',
+                title: 'Dettaglio Prodotti',
                 items: [
                     {
                         xtype: 'textfield',
-                        name: 'fname',
-                        label: 'First name:'
-                    },
-                    {
-                        xtype: 'textfield',
-                        name: 'lname',
-                        label: 'Last name:'
+                        name: 'Titolo',
+                        label: 'Titolo:',
+                        disabled: true
                     }
                 ] // items
             },
             {
+                xtype: 'spinnerfield',
+                label: 'Quantità da ordinare:',
+                minValue: 1,
+                maxValue: 100,
+                increment: 1,
+                cycle: true,
+                defaultValue: 1,
+                stepValue: 1
+
+            },
+            {
                 xtype: 'toolbar',
-                layout: {
-                    pack: 'center'
-                }, // layout
+                layout: 'hbox',
                 ui: 'plain',
                 items: [
                     {
                         xtype: 'button',
-                        text: 'Reset',
+                        text: 'Back',
                         ui: 'decline',
-                        handler: function (btn, evt) {
-                            Ext.Msg.confirm('', 'Are you sure you want to reset this form?', function (btn) {
-                                if (btn === 'yes') {
-                                    contactForm.setValues({
-                                        fname: '',
-                                        lname: ''
-                                    }); // contactForm()
-                                } // switch
-                            }); // confirm()
-                        }
+                        action: 'declineCarrello'
                     },
                     {
                         xtype: 'button',
-                        text: 'Submit',
+                        text: 'Aggiungi al carrello',
                         ui: 'confirm',
-                        handler: function (btn, evt) {
-                            var values = contactForm.getValues();
-                            Ext.Msg.alert('Welcome', Ext.String.format('{0} {1}', values.fname, values.lname));
-                        } // handler
+                        action: 'addToCarrello'
                     }
                 ] // items (toolbar)
             }

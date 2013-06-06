@@ -1,0 +1,23 @@
+.iconBasketAdd {
+    background-image: url(../../images/basket-add.png) !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+.iconBasketRemove {
+    background-image: url(../../images/basket-remove.png) !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+.iconBasketFull {
+    background-image: url(../../images/basket-full.png) !important;
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}

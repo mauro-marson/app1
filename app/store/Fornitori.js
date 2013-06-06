@@ -24,7 +24,7 @@ Ext.define('GAS.store.Fornitori', {
             return record.get('Titolo')[0];
         },
         storeId: 'Fornitori',
-        autoLoad: true,
+        autoLoad: false,
         autoSync: false,
         sorters: 'Titolo'
     }/*,

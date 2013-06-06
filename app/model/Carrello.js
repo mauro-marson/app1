@@ -18,37 +18,18 @@ Ext.define('GAS.model.Carrello', {
 
     config: {
         fields: [
+            { name: 'UserName', type: 'string' },
             { name: 'IDProdotto', type: 'int' },
-            { name: 'Codice', type: 'string' },
             { name: 'Titolo', type: 'string' },
-            { name: 'DescrizioneBreve', type: 'string' },
-            { name: 'Descrizione', type: 'string' },
-            { name: 'Prezzo', type: 'double' },
-            { name: 'Image1', type: 'string' },
-            { name: 'Image1T', type: 'string' },
-            { name: 'Image2', type: 'string' },
-            { name: 'Image2T', type: 'string' },
-            { name: 'Image3', type: 'string' },
-            { name: 'Image3T', type: 'string' },
-            { name: 'DataIns', type: 'date' },
-            { name: 'OperatoreIns', type: 'string' },
-            { name: 'DataMod', type: 'date' },
-            { name: 'OperatoreMod', type: 'string' },
-            { name: 'Ordine', type: 'int' },
-            { name: 'IDCategoria', type: 'int' },
-            { name: 'IDStato', type: 'int' }
+            { name: 'Quantita', type: 'int' }
         ],
         proxy: {
             type: 'ajax',
             actionMethods: 'POST',
-            extraParams: {
-                tableName: 'carrello',
-                orderBy: 'Titolo',
-                where: ''
-            },
+
             api: {
-                read: ' getTable.php',
-                create: 'TODO/Create',
+                read: ' TODO/read',
+                create: 'setTable.php',
                 destroy: 'TODO/Delete',
                 update: 'TODO/Update'
             },
@@ -63,7 +44,9 @@ Ext.define('GAS.model.Carrello', {
                 type: 'json',
                 root: 'data',
                 encode: true,
-                writeAllFields: true
+                writeAllFields: true,
+                successProperty: 'success',
+                messageProperty: 'message'
             },
             listeners: {
                 exception: function () {
@@ -75,9 +58,7 @@ Ext.define('GAS.model.Carrello', {
     fullName: function () {
         var d = this.data,
             names = [
-                d.Titolo,
-                (!d.DescrizioneBreve ? "" : d.DescrizioneBreve + "."),
-                d.Descrizione
+                d.Titolo
             ];
         return names.join(" ");
     }

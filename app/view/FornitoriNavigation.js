@@ -17,7 +17,7 @@ Ext.define('GAS.view.FornitoriNavigation', {
         navigationBar: {
             //ui: 'light',
             docked: 'top',
-            height: 40,
+            height: 5,
             items: [
                 {
                     xtype: 'button',
@@ -30,6 +30,14 @@ Ext.define('GAS.view.FornitoriNavigation', {
                     action: 'userSetting',
                     align: 'right',
                     iconCls: 'settings'
+                },
+                {
+                    xtype: 'button',
+                    action: 'carrello',
+                    align: 'right',
+                    iconCls: 'iconBasketFull',
+                    tooltip: 'carrello'
+
                 }
             ]
         },

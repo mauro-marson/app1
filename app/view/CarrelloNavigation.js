@@ -17,26 +17,18 @@ Ext.define('GAS.view.CarrelloNavigation', {
         //defaultBackButtonText: 'indietro',
         fullscreen: true,
         title: 'Carrello',
-        /*navigationBar: {
-         ui: 'light',
-         docked: 'top',
-         height: 40,
-         items: [
-         {
-         xtype: 'button',
-         text: 'Log Out',
-         action: 'logout',
-         align: 'left'
-         },
-         {
-         xtype: 'button',
-         //text: 'Setting',
-         action: 'userSetting',
-         align: 'right',
-         iconCls: 'settings'
-         }
-         ]
-         },*/
+        height: 5,
+        navigationBar: {
+            //ui: 'light',
+            height: 5,
+            items: [
+                {
+                    xtype: 'button',
+                    text: 'Prodotti',
+                    action: 'backToProdotti'
+                }
+            ]
+        },
         items: [
             {
                 xtype: 'CarrelloList'

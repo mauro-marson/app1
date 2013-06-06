@@ -10,7 +10,7 @@ Ext.define('GAS.view.Blog', {
     alias: 'widget.Blog',
     config: {
         displayField: 'title',
-
+        height: 5,
         store: {
             type: 'tree',
 

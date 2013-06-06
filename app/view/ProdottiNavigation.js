@@ -17,12 +17,20 @@ Ext.define('GAS.view.ProdottiNavigation', {
         navigationBar: {
             //ui: 'light',
             docked: 'top',
-            height: 40,
+            height: 5,
             items: [
                 {
                     xtype: 'button',
                     text: 'Categorie',
-                    action: 'categorie'
+                    action: 'backToCategorie'
+                },
+                {
+                    xtype: 'button',
+                    action: 'carrello',
+                    align: 'right',
+                    iconCls: 'iconBasketFull',
+                    tooltip: 'carrello'
+
                 }
             ]
         },

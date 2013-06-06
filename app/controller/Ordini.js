@@ -16,13 +16,17 @@ Ext.define('GAS.controller.Ordini', {
         refs: {
             loginButton: 'button[action=login]',
             logoutButton: 'button[action=logout]',
-            userSettingButton: 'button[action=userSetting]',
-            fornitoriList: 'FornitoriList',
-            categorieList: 'CategorieList',
-            prodottiList: 'ProdottiList',
-            categorieNavigation: 'button[action=fornitori]',
-            prodottiNavigation: 'button[action=categorie]',
-            prodottiDetail: 'button[action=prodotti]'
+            showUserSetting: 'button[action=userSetting]',
+            showCarrello: 'button[action=carrello]',
+            discloseFornitori: 'FornitoriList',
+            discloseCategorie: 'CategorieList',
+            discloseProdotti: 'ProdottiList',
+            backToFornitori: 'button[action=backToFornitori]',
+            backToCategorie: 'button[action=backToCategorie]',
+            backToProdotti: 'button[action=backToProdotti]',
+            userSettingSubmit: 'panel[xtype=UserSetting] button[action=backToFornitori]',
+            addToCarrello: 'button[action=addToCarrello]',
+            declineCarrello: 'button[action=declineCarrello]'
         },
 
         control: {
@@ -32,26 +36,38 @@ Ext.define('GAS.controller.Ordini', {
             logoutButton: {
                 tap: 'doLogout'
             },
-            userSettingButton: {
+            showUserSetting: {
                 tap: 'doUserSetting'
             },
-            fornitoriList: {
+            showCarrello: {
+                tap: 'showCarrello'
+            },
+            discloseFornitori: {
                 disclose: 'onDiscloseFornitori'
             },
-            categorieList: {
+            discloseCategorie: {
                 disclose: 'onDiscloseCategorie'
             },
-            prodottiList: {
+            discloseProdotti: {
                 disclose: 'onDiscloseProdotti'
             },
-            categorieNavigation: {
-                tap: 'showFornitoriList'
+            backToFornitori: {
+                tap: 'showFornitori'
             },
-            prodottiNavigation: {
-                tap: 'showCategorieList'
+            backToCategorie: {
+                tap: 'showCategorie'
             },
-            prodottiDetail: {
-                tap: 'showProdottiList'
+            backToProdotti: {
+                tap: 'showProdotti'
+            },
+            userSettingSubmit: {
+                tap: 'showFornitori1'
+            },
+            addToCarrello: {
+                tap: 'addToCarrello'
+            },
+            declineCarrello: {
+                tap: 'declineCarrello'
             }
         }
     },
@@ -92,7 +108,7 @@ Ext.define('GAS.controller.Ordini', {
         });
 
         Ext.Ajax.request({
-            url: '../../../gas/mobile/app1/login.php',
+            url: '../../../mobile/app1/login.php',
             method: 'POST',
             root: 'data',
             params: {
@@ -106,12 +122,32 @@ Ext.define('GAS.controller.Ordini', {
                 if (loginResponse.success == true) {
                     // The server will send a token that can be used throughout the app to confirm that the user is authenticated.
                     me.sessionToken = loginResponse.sessionToken;
-                    panel.setMasked(false);
-                    //me.signInSuccess();     //Just simulating success.
-                    var parent = panel.getParent();
-                    parent.setActiveItem(1);
-                    console.log('dovrebbe esserci');
 
+                    var store = Ext.data.StoreManager.get('Fornitori');
+                    if (!store.isLoaded()) {
+                        //var where = null;
+                        //store.getModel().getProxy().setExtraParam('where', where);
+
+                        store.load(
+                            {
+                                callback: function (records, operation, success) {
+                                    // do something after the load finishes
+                                    if (success) {
+                                        panel.setMasked(false);
+                                        var parent = panel.getParent();
+                                        parent.setActiveItem(2);
+                                        console.log('fornitori caricati');
+                                    }
+                                },
+                                scope: this
+                            });
+                    }
+                    else {
+                        panel.setMasked(false);
+                        var parent = panel.getParent();
+                        parent.setActiveItem(2);
+                        console.log('fornitori caricati');
+                    }
                 } else {
                     //GAS.controller.Login.prototype.signInFailure(loginResponse.message);
                     //var loginView = me.getLoginView();
@@ -131,20 +167,20 @@ Ext.define('GAS.controller.Ordini', {
         console.log('tap from logout button from controller');
         var me = this;
 
-        var panel = button.up('panel'),
-            usernameField = panel.down('#userNameTextField'),
-            passwordField = panel.down('#passwordTextField'),
-            label = panel.down('#signInFailedLabel')
+        //var panel = button.up('panel'),
+        //usernameField = panel.down('#userNameTextField'),
+        //passwordField = panel.down('#passwordTextField'),
+        //label = panel.down('#signInFailedLabel')
+
+        var panel = button.getParent().getParent().getParent(),
+            parent = panel.getParent()
             ;
 
-        var parent = panel.getParent()
-            ;
-
-        panel.setActiveItem(0);
+        parent.setActiveItem(1);
 
 
         Ext.Ajax.request({
-            url: '../../../gas/mobile/app1/logout.php',
+            url: '../../../mobile/app1/logout.php',
             method: 'POST',
             root: 'data',
             params: {
@@ -153,7 +189,22 @@ Ext.define('GAS.controller.Ordini', {
         });
     },
     doUserSetting: function (button, e, options) {
-        alert('userSetting');
+        //alert('userSetting');
+        var panel = button.getParent().getParent().getParent()
+        parent = panel.getParent()
+        ;
+        // qui si deve caricare la form del dettaglio
+
+        parent.setActiveItem(6);
+    },
+    showCarrello: function (button, e, options) {
+        //alert('userSetting');
+        var panel = button.getParent().getParent().getParent()
+        parent = panel.getParent()
+        ;
+        // qui si deve caricare la form del dettaglio
+
+        parent.setActiveItem(7);
     },
     onDiscloseFornitori: function (view, record, target, index, event) {
         //console.log('Disclosure icon was tapped on the List');
@@ -165,6 +216,7 @@ Ext.define('GAS.controller.Ordini', {
         // qui devo fare la load dello store categorie filtrata per fornitore
         // e mostrare la view delle categorie
         var store = Ext.data.StoreManager.get('Categorie');
+
         var key = record.get('IDNegozio');
         var where = 'IDNegozio=' + key;
         //var model= storeCategorie.getModel();
@@ -181,11 +233,13 @@ Ext.define('GAS.controller.Ordini', {
                         var panel = view.getParent()
                         parent = panel.getParent()
                         ;
-                        parent.setActiveItem(1);
+                        parent.setActiveItem(3);
+
                     }
                 },
                 scope: this
             });
+
     },
     onDiscloseCategorie: function (view, record, target, index, event) {
 //        console.log('Disclosure icon was tapped on the List');
@@ -194,6 +248,7 @@ Ext.define('GAS.controller.Ordini', {
 //            'la categoria scelta è: ' + record.get('Titolo')
 //        );
         var store = Ext.data.StoreManager.get('Prodotti');
+
         var key = record.get('IDCategoria');
         var where = 'IDCategoria=' + key;
         store.getModel().getProxy().setExtraParam('where', where);
@@ -207,16 +262,17 @@ Ext.define('GAS.controller.Ordini', {
                         var panel = view.getParent()
                         parent = panel.getParent()
                         ;
-                        parent.setActiveItem(2);
+                        parent.setActiveItem(4);
 
                     }
                 },
                 scope: this
             });
+
     },
     onDiscloseProdotti: function (view, record, target, index, event) {
-        console.log('Disclosure icon was tapped on the List');
-        console.log(view, record, target, index, event);
+        //console.log('Disclosure icon was tapped on the List');
+        //console.log(view, record, target, index, event);
 //        Ext.Msg.alert('Clicked on the disclosure icon',
 //            'il prodotto scelto è: ' + record.get('Titolo')
 //        );
@@ -225,21 +281,46 @@ Ext.define('GAS.controller.Ordini', {
         ;
         // qui si deve caricare la form del dettaglio
 
-        parent.setActiveItem(3);
+        parent.setActiveItem(5);
 
 
     },
-    showFornitoriList: function (button, e, options) {
-        var parent = button.getParent().getParent().getParent().getParent();
-        parent.setActiveItem(0);
-    },
-    showCategorieList: function (button, e, options) {
-        var parent = button.getParent().getParent().getParent().getParent();
-        parent.setActiveItem(1);
-    },
-    showProdottiList: function (button, e, options) {
+    showFornitori: function (button, e, options) {
         var parent = button.getParent().getParent().getParent().getParent();
         parent.setActiveItem(2);
+    },
+    showFornitori1: function (button, e, options) {
+        var parent = button.getParent().getParent().getParent();
+        parent.setActiveItem(2);
+    },
+    showCategorie: function (button, e, options) {
+        var parent = button.getParent().getParent().getParent().getParent();
+        parent.setActiveItem(3);
+    },
+    showProdotti: function (button, e, options) {
+        var parent = button.getParent().getParent().getParent().getParent();
+        parent.setActiveItem(4);
+    },
+    addToCarrello: function (button, e, options) {
+        var store = Ext.data.StoreManager.get('Carrello');
+        store.add({
+            UserName: 'ciccio',
+            IDProdotto: 1,
+            Titolo: 'merlone',
+            Quantita: 10
+        });
+        //Ext.Msg.alert('Prodotto aggiunto al carrello!');
+        var parent = button.getParent().getParent().getParent();
+        parent.setActiveItem(7);
+    },
+    declineCarrello: function (button, e, options) {
+        // Ext.Msg.confirm('', 'Sei sicuro?', function (btn) {
+        //   if (btn === 'yes') {
+        var parent = button.getParent().getParent().getParent();
+        parent.setActiveItem(4);
+        // } // switch
+        // }); // confirm()
+
     }
 
 });

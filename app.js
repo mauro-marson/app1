@@ -1,32 +1,31 @@
 /* disegno dell'applicazione
- Main
+ +--> Main
  |
- +--> Home   (tab panel)
- +--> Ordini (card layout)
+ +--> Home
+ |
+ +--> Login
+ |
+ +--> FornitoriNavigation
  |       |
- |       +--> Login   (form panel)
- |       +--> Options (card layout)
- |              |
- |              +--> FornitoriNavigation
- |              |       |
- |              |       +--> FornitoriList
- |              |       +--> CategorieNavigation
- |              |               |
- |              |               +--> CategorieList
- |              |               +--> ArticoliNavigation
- |              |                       |
- |              |                       +--> ArticoliList
- |              |                       +--> ArticoliDetail
- |              |
- |              +--> ArticoliSearch
- |              |       |
- |              |       +--> ArticoliList
- |              |       +--> ArticoliDetail
- |              |
- |              +--> CarrelloNavigation
- |                      |
- |                      +--> ArticoliList
- |                      +--> ArticoliDetail
+ |       +--> FornitoriList
+ |
+ +--> CategorieNavigation
+ |      |
+ |      +--> CategorieList
+ |
+ +--> ProdottiNavigation
+ |      |
+ |      +--> ProdottiList
+ |
+ +--> ProdottiDetail
+ |
+ +--> UserSetting
+ |
+ +--> CarrelloNavigation
+ |      |
+ |      +--> CarrelloList
+ |
+ +--> CarrelloDetail
  |
  +--> Blog
  +--> Contacts  (form panel)
@@ -43,12 +42,9 @@ Ext.application({
     ],
     views: [
         'Main',
-        'Ordini',
-        'Carrello',
         'Blog',
         'Contact',
         'Login',
-        'Options',
         'FornitoriNavigation',
         'FornitoriList',
         'FornitoriDetail',
@@ -60,7 +56,8 @@ Ext.application({
         'ProdottiDetail',
         'CarrelloNavigation',
         'CarrelloList',
-        'CarrelloDetail'
+        'CarrelloDetail',
+        'UserSetting'
 
 
 

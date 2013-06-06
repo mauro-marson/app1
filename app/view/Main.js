@@ -39,22 +39,38 @@ Ext.define('GAS.view.Main', {
                 ].join("")
             },
 
-            // Ordini Page
-
+            // ActiveItem(1)
             {
-                xtype: 'Ordini',
+                xtype: 'Login',
                 title: 'Ordini',
                 iconCls: 'search',
                 cls: 'search'
             },
-
-            // Carrello Page
+            // ActiveItem(2)
             {
-                xtype: 'Carrello',
-                title: 'Carrello',
-                iconCls: 'organize',
-                cls: 'organize'
+                xtype: 'FornitoriNavigation'
             },
+            // ActiveItem(3)
+            {
+                xtype: 'CategorieNavigation'
+            },
+            // ActiveItem(4)
+            {
+                xtype: 'ProdottiNavigation'
+            },
+            // ActiveItem(5)
+            {
+                xtype: 'ProdottiDetail'
+            },
+            // ActiveItem(6)
+            {
+                xtype: 'UserSetting'
+            },
+            // ActiveItem(7)
+            {
+                xtype: 'CarrelloNavigation'
+            },
+
             // This is the recent blogs page. It uses a tree store to load its data from blog.json
             {
                 xtype: 'Blog',

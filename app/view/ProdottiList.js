@@ -20,6 +20,7 @@ Ext.define('GAS.view.ProdottiList', {
         'GAS.store.Prodotti'
     ],
     config: {
+        title: 'Prodotti',
         grouped: true,
         indexBar: true,
         store: 'Prodotti',

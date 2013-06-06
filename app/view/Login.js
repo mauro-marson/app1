@@ -17,29 +17,30 @@ Ext.define('GAS.view.Login', {
     extend: 'Ext.form.Panel',
     alias: "widget.Login",
 
-    requires: [
-        'Ext.form.FieldSet',
-        'Ext.form.Password',
-        'Ext.Label',
-        'Ext.Img',
-        'Ext.util.DelayedTask'
-    ],
-
+    /*requires: [
+     'Ext.form.FieldSet',
+     'Ext.form.Password',
+     'Ext.Label',
+     'Ext.Img',
+     'Ext.util.DelayedTask'
+     ],
+     */
     config: {
-        title: 'Login',
+        layout: 'vbox',
         items: [
-            {
-                docked: 'top',
-                xtype: 'titlebar',
-                title: 'Login'
-
-            },
-            {
-                xtype: 'image',
-                centered: true,
-                style: 'width:80px;height:80px;margin:auto',
-                src: 'images/lock.png'
-            },
+//            {
+//                docked: 'top',
+//                xtype: 'titlebar',
+//                title: 'Login'
+//
+//            },
+            /*    {
+             xtype: 'image',
+             centered: true,
+             style: 'width:20px;height:20px;margin:auto',
+             src: 'images/lock.png'
+             },
+             */
             {
                 xtype: 'label',
                 hidden: true,
@@ -50,9 +51,11 @@ Ext.define('GAS.view.Login', {
                 showAnimation: 'fadeIn',
                 style: 'color:#990000;margin:5px 0px;'
             },
+
             {
                 xtype: 'fieldset',
-                id: 'myFieldSet',
+                title: 'Login',
+                instructions: 'inserire entrambi i campi',
                 items: [
                     {
                         xtype: 'textfield',
@@ -78,7 +81,7 @@ Ext.define('GAS.view.Login', {
             {
                 xtype: 'button',
                 action: 'login',
-                padding: 10,
+                ui: 'confirm',
                 text: 'Log in'
             }
         ]

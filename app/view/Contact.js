@@ -5,6 +5,7 @@
  * Time: 14.52
  * To change this template use File | Settings | File Templates.
  */
+
 Ext.define('GAS.view.Contact', {
     extend: 'Ext.form.Panel',
     alias: 'widget.Contact',
