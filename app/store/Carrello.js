@@ -8,7 +8,7 @@ Ext.define('GAS.store.Carrello', {
     config: {
         model: 'GAS.model.Carrello',
         grouper: function (record) {
-            return record.get('Titolo')[0];
+            return record.get('Fornitore')[0];
         },
         storeId: 'Carrello',
         autoLoad: false,

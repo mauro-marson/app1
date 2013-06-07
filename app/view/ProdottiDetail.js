@@ -30,6 +30,7 @@ Ext.define('GAS.view.ProdottiDetail', {
                         name: 'Fornitore',
                         label: 'Fornitore:',
                         disabled: true,
+                        hidden: true,
                         id: 'fornitore'
                     },
                     {

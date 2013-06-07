@@ -252,6 +252,7 @@ Ext.define('GAS.controller.Ordini', {
         var store = Ext.data.StoreManager.get('Categorie');
 
         var key = record.get('IDNegozio');
+        var fornitore = record.get('Titolo');
         var where = 'IDNegozio=' + key;
         //var model= storeCategorie.getModel();
         //var proxy= model.getProxy();
@@ -264,9 +265,14 @@ Ext.define('GAS.controller.Ordini', {
                     // do something after the load finishes
                     if (success) {
                         //alert('categorie caricate');
+
                         var panel = view.getParent(),
                             parent = panel.getParent()
                             ;
+
+                        var container = parent.down('#categorienavigation');
+                        container.down('#fornitore').setValue(fornitore);
+
                         parent.setActiveItem(3);
 
                     }
@@ -294,8 +300,13 @@ Ext.define('GAS.controller.Ordini', {
                     if (success) {
                         //alert('prodotti caricati');
                         var panel = view.getParent(),
-                            parent = panel.getParent()
+                            parent = panel.getParent(),
+                            fornitore = panel.down('#fornitore').getValue()
                             ;
+
+                        var container = parent.down('#prodottinavigation');
+                        container.down('#fornitore').setValue(fornitore);
+
                         parent.setActiveItem(4);
 
                     }
@@ -306,7 +317,8 @@ Ext.define('GAS.controller.Ordini', {
     },
     onDiscloseProdotti: function (view, record, target, index, event) {
         var panel = view.getParent(),
-            parent = panel.getParent()
+            parent = panel.getParent(),
+            fornitore = panel.down('#fornitore').getValue()
             ;
         // qui si deve caricare la form del dettaglio
         var form = parent.down('#prodottidetail');
@@ -314,8 +326,7 @@ Ext.define('GAS.controller.Ordini', {
         form.down('spinnerfield').setValue(1);
 
         form.down('#username').setValue(GAS.app.userName);
-        form.down('#fornitore').setValue('ciccio');
-
+        form.down('#fornitore').setValue(fornitore);
 
         parent.setActiveItem(5);
         //parent.resetActiveItem();
@@ -392,7 +403,7 @@ Ext.define('GAS.controller.Ordini', {
         store.add({
             UserName: GAS.app.userName,
             IDProdotto: idProdotto.getValue(),
-            Titolo: fornitore.getValue() + ' - ' + titolo.getValue(),
+            Titolo: titolo.getValue(),
             Fornitore: fornitore.getValue(),
             Quantita: quantita.getValue()
         });
@@ -431,6 +442,12 @@ Ext.define('GAS.controller.Ordini', {
     updateToCarrello: function (button, e, options) {
         // Funzione
         //alert('update');
+        var form = button.up('formpanel'),
+            quantita = form.down('spinnerfield'),
+            record = form.getRecord();
+
+        form.updateRecord(record);
+
         var parent = button.getParent().getParent().getParent();
         parent.setActiveItem(7);
     },
@@ -438,6 +455,11 @@ Ext.define('GAS.controller.Ordini', {
         // Funzione
         //alert('cancella');
         var form = button.up('form');
+        var record = form.getRecord();
+        var store = Ext.data.StoreManager.get('Carrello');
+
+        store.remove(record);
+        store.sync();
 
         var parent = button.getParent().getParent().getParent();
         parent.setActiveItem(7);

@@ -31,7 +31,7 @@ Ext.define('GAS.view.Main', {
                 iconCls: 'home',
                 cls: 'home',
                 html: [
-                    '<div style="text-align:center"><img height=300 width=300 src="images/logoGas.jpg"/></div>',
+                    '<div style="text-align:center"><img height=200 width=200 src="images/logoGas.jpg"/></div>',
                     '<h1 style="text-align:center">Gruppo Acquisto Solidale</h1>',
                     '<h1 style="text-align:center">Monastier di Treviso</h1>',
                     //"<p>Benvenuti in Gas Mobile!!</p>",

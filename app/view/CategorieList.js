@@ -24,6 +24,7 @@ Ext.define('GAS.view.CategorieList', {
         grouped: true,
         indexBar: true,
         store: 'Categorie',
+        loadingText: "Loading...",
         onItemDisclosure: true,
         itemTpl: /*
          "<tpl if='Image ==1 '>"+

@@ -8,6 +8,7 @@
 Ext.define('GAS.view.CategorieNavigation', {
     extend: 'Ext.navigation.View',
     alias: 'widget.CategorieNavigation',
+    id: 'categorienavigation',
     requires: [
         'GAS.view.CategorieList'
     ],
@@ -22,6 +23,14 @@ Ext.define('GAS.view.CategorieNavigation', {
                     text: 'Fornitori',
                     action: 'backToFornitori',
                     ui: 'back'
+
+                },
+                {
+                    xtype: 'textfield',
+                    //text: 'Fornitori',
+                    disabled: true,
+                    hidden: true,
+                    id: 'fornitore'
 
                 },
                 {

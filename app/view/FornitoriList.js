@@ -24,6 +24,7 @@ Ext.define('GAS.view.FornitoriList', {
         grouped: true,
         indexBar: true,
         store: 'Fornitori',
+        loadingText: "Loading...",
         onItemDisclosure: /*function(){
          console.log('Disclosure more info!');
          },*/

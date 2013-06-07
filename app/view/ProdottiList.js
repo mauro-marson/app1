@@ -24,6 +24,7 @@ Ext.define('GAS.view.ProdottiList', {
         grouped: true,
         indexBar: true,
         store: 'Prodotti',
+        loadingText: "Loading...",
         onItemDisclosure: true,
         itemTpl: '<img src="http://www.gasmonastier.it/gasstore/allegati/{Image1}" height="50" width="100" />  {Titolo}'
     }

@@ -14,7 +14,7 @@
  */
 
 Ext.define('GAS.view.CarrelloList', {
-    extend: 'Ext.List',
+    extend: 'Ext.dataview.List',
     alias: 'widget.CarrelloList',
     requires: [
         'GAS.store.Carrello'
@@ -24,12 +24,10 @@ Ext.define('GAS.view.CarrelloList', {
         grouped: true,
         indexBar: true,
         store: 'Carrello',
-        onItemDisclosure: /*function(){
-         console.log('Disclosure more info!');
-         },*/
-            true,
-        //itemTpl: '<img src="http://www.gasmonastier.it/gasstore/allegati/{Image1}" height="50" width="100" />  {Titolo} - {DescrizioneBreve}'
-        //itemTpl: '{Titolo} - quantità: {Quantita}'
-        itemTpl: '<table><tr><td width="600">{Titolo}</td><td width="100" style="text-align:right">{Quantita}</td></tr></table>'
+        loadingText: "Loading...",
+        emptyText: '</pre><div class="carrello-vuoto">Carrello vuoto.</div><pre>',
+        onItemDisclosure: true,
+        //itemTpl: '<table><tr><td width="400">{Titolo}</td><td width="100" style="text-align:right">{Quantita}</td></tr></table>'
+        itemTpl: '</pre><div class="list-item-fornitore">{Fornitore}</div><div class="list-item-prodotto"><table><tr><td width="400">{Titolo}</td><td width="100" style="text-align:right">{Quantita}</td></tr></table></div><pre>'
     }
 });
