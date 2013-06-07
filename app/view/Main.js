@@ -25,17 +25,18 @@ Ext.define('GAS.view.Main', {
 
         items: [
             // This is the home page, just some simple html
+            // ActiveItem(0)
             {
                 title: 'Home',
                 iconCls: 'home',
                 cls: 'home',
                 html: [
-                    '<img height=200 width=200 src="images/logoGas.jpg"/>',
-                    '<h1>Gruppo Acquisto Solidale</h1>',
-                    '<h1>Monastier di Treviso</h1>',
+                    '<div style="text-align:center"><img height=300 width=300 src="images/logoGas.jpg"/></div>',
+                    '<h1 style="text-align:center">Gruppo Acquisto Solidale</h1>',
+                    '<h1 style="text-align:center">Monastier di Treviso</h1>',
                     //"<p>Benvenuti in Gas Mobile!!</p>",
                     '<br>',
-                    '<h2>by Mauro Marson</h2>'
+                    '<h2 style="text-align:center">by <a href="http://www.mauromarson.eu" target="_blank">Mauro Marson</a></h2>'
                 ].join("")
             },
 
@@ -70,7 +71,10 @@ Ext.define('GAS.view.Main', {
             {
                 xtype: 'CarrelloNavigation'
             },
-
+            // ActiveItem(8)
+            {
+                xtype: 'CarrelloDetail'
+            },
             // This is the recent blogs page. It uses a tree store to load its data from blog.json
             {
                 xtype: 'Blog',

@@ -8,24 +8,34 @@
 Ext.define('GAS.view.CarrelloNavigation', {
     extend: 'Ext.navigation.View',
     alias: 'widget.CarrelloNavigation',
-    //xtype: 'fornitorinavigation',
     requires: [
         'GAS.view.CarrelloList'
     ],
     config: {
-        //useTitleForBackButtonText: true,
-        //defaultBackButtonText: 'indietro',
         fullscreen: true,
-        title: 'Carrello',
-        height: 5,
         navigationBar: {
             //ui: 'light',
             height: 5,
             items: [
                 {
                     xtype: 'button',
-                    text: 'Prodotti',
-                    action: 'backToProdotti'
+                    text: 'Indietro',
+                    action: 'backToLastActiveItem',
+                    ui: 'back'
+                },
+                {
+                    xtype: 'button',
+                    action: 'refresh',
+                    align: 'right',
+                    iconCls: 'refresh',
+                    cls: 'refresh'
+                },
+                {
+                    xtype: 'button',
+                    action: 'trash',
+                    align: 'right',
+                    iconCls: 'trash',
+                    cls: 'trash'
                 }
             ]
         },

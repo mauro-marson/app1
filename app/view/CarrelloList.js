@@ -16,7 +16,6 @@
 Ext.define('GAS.view.CarrelloList', {
     extend: 'Ext.List',
     alias: 'widget.CarrelloList',
-    //xtype: 'fornitorilist',
     requires: [
         'GAS.store.Carrello'
     ],
@@ -29,6 +28,8 @@ Ext.define('GAS.view.CarrelloList', {
          console.log('Disclosure more info!');
          },*/
             true,
-        itemTpl: '<img src="http://www.gasmonastier.it/gasstore/allegati/{Image1}" height="50" width="100" />  {Titolo} - {DescrizioneBreve}'
+        //itemTpl: '<img src="http://www.gasmonastier.it/gasstore/allegati/{Image1}" height="50" width="100" />  {Titolo} - {DescrizioneBreve}'
+        //itemTpl: '{Titolo} - quantità: {Quantita}'
+        itemTpl: '<table><tr><td width="600">{Titolo}</td><td width="100" style="text-align:right">{Quantita}</td></tr></table>'
     }
 });

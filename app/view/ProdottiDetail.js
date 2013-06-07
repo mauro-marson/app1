@@ -8,8 +8,10 @@
 Ext.define('GAS.view.ProdottiDetail', {
     extend: 'Ext.form.Panel',
     alias: 'widget.ProdottiDetail',
+    id: 'prodottidetail',
     config: {
         fullscreen: true,
+        store: 'Prodotti',
         items: [
             {
                 xtype: 'fieldset',
@@ -17,22 +19,53 @@ Ext.define('GAS.view.ProdottiDetail', {
                 items: [
                     {
                         xtype: 'textfield',
+                        name: 'UserName',
+                        label: 'UserName:',
+                        disabled: true,
+                        hidden: true,
+                        id: 'username'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'Fornitore',
+                        label: 'Fornitore:',
+                        disabled: true,
+                        id: 'fornitore'
+                    },
+                    {
+                        xtype: 'textfield',
                         name: 'Titolo',
                         label: 'Titolo:',
-                        disabled: true
+                        disabled: true,
+                        id: 'titolo'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'IDProdotto',
+                        label: 'IDProdotto:',
+                        hidden: true,
+                        id: 'idprodotto'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'Descrizione',
+                        label: 'Descrizione:',
+                        hidden: true,
+                        id: 'descrizione'
+                    },
+                    {
+                        xtype: 'spinnerfield',
+                        label: 'Quantità da ordinare:',
+                        name: 'Quantita',
+                        minValue: 1,
+                        maxValue: 100,
+                        increment: 1,
+                        cycle: true,
+                        defaultValue: 1,
+                        stepValue: 1,
+                        padding: 10
                     }
                 ] // items
-            },
-            {
-                xtype: 'spinnerfield',
-                label: 'Quantità da ordinare:',
-                minValue: 1,
-                maxValue: 100,
-                increment: 1,
-                cycle: true,
-                defaultValue: 1,
-                stepValue: 1
-
             },
             {
                 xtype: 'toolbar',
@@ -41,14 +74,16 @@ Ext.define('GAS.view.ProdottiDetail', {
                 items: [
                     {
                         xtype: 'button',
-                        text: 'Back',
-                        ui: 'decline',
+                        //text: 'Indietro',
+                        iconCls: 'delete',
+                        ui: 'normal',
                         action: 'declineCarrello'
                     },
                     {
                         xtype: 'button',
-                        text: 'Aggiungi al carrello',
+                        //text: 'Aggiungi al carrello',
                         ui: 'confirm',
+                        iconCls: 'action',
                         action: 'addToCarrello'
                     }
                 ] // items (toolbar)

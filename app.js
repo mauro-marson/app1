@@ -35,6 +35,8 @@
 Ext.application({
     name: 'GAS',
     appFolder: 'app',
+    userName: null,
+    lastActiveItem: null,
 
     controllers: [
         'Main',        // gestisce le schermate pubbliche
@@ -58,9 +60,6 @@ Ext.application({
         'CarrelloList',
         'CarrelloDetail',
         'UserSetting'
-
-
-
     ],
 
     models: [

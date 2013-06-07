@@ -13,7 +13,6 @@ Ext.define('GAS.view.CategorieNavigation', {
     ],
     config: {
         fullscreen: true,
-        title: 'Categorie',
         navigationBar: {
             //ui: 'light',
             height: 5,
@@ -21,14 +20,16 @@ Ext.define('GAS.view.CategorieNavigation', {
                 {
                     xtype: 'button',
                     text: 'Fornitori',
-                    action: 'backToFornitori'
+                    action: 'backToFornitori',
+                    ui: 'back'
+
                 },
                 {
                     xtype: 'button',
                     action: 'carrello',
                     align: 'right',
-                    iconCls: 'iconBasketFull',
-                    tooltip: 'carrello'
+                    //iconCls: 'iconBasketFull',
+                    text: 'Carrello'
 
                 }
             ]

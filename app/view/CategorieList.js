@@ -33,6 +33,6 @@ Ext.define('GAS.view.CategorieList', {
          '<img src="http://www.gasmonastier.it/gasstore/allegati/noImage.jpg" height="50" width="100" />  {Titolo}'+
          '</tpl>'
          */
-            '<p> {Titolo}'
+            '{Titolo}'
     }
 });

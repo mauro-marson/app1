@@ -13,7 +13,6 @@ Ext.define('GAS.view.ProdottiNavigation', {
     ],
     config: {
         fullscreen: true,
-        title: 'Prodotti',
         navigationBar: {
             //ui: 'light',
             docked: 'top',
@@ -22,14 +21,31 @@ Ext.define('GAS.view.ProdottiNavigation', {
                 {
                     xtype: 'button',
                     text: 'Categorie',
-                    action: 'backToCategorie'
+                    action: 'backToCategorie',
+                    ui: 'back'
+                },
+                {
+                    xtype: 'spacer'
+                },
+                {
+                    xtype: 'searchfield',
+                    placeHolder: 'Search...',
+                    name: 'searchProdotti'
+//                    listeners: {
+//                        scope: this,
+//                        clearicontap: this.onSearchClearIconTap,
+//                        keyup: this.onSearchKeyUp
+//                    }
+                },
+                {
+                    xtype: 'spacer'
                 },
                 {
                     xtype: 'button',
                     action: 'carrello',
                     align: 'right',
-                    iconCls: 'iconBasketFull',
-                    tooltip: 'carrello'
+                    //iconCls: 'iconBasketFull',
+                    text: 'Carrello'
 
                 }
             ]

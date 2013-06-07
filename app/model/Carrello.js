@@ -19,6 +19,7 @@ Ext.define('GAS.model.Carrello', {
     config: {
         fields: [
             { name: 'UserName', type: 'string' },
+            { name: 'Fornitore', type: 'string' },
             { name: 'IDProdotto', type: 'int' },
             { name: 'Titolo', type: 'string' },
             { name: 'Quantita', type: 'int' }

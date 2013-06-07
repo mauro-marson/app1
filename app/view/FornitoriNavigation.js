@@ -23,7 +23,8 @@ Ext.define('GAS.view.FornitoriNavigation', {
                     xtype: 'button',
                     text: 'Log Out',
                     action: 'logout',
-                    align: 'left'
+                    align: 'left',
+                    ui: 'back'
                 },
                 {
                     xtype: 'button',
@@ -35,8 +36,8 @@ Ext.define('GAS.view.FornitoriNavigation', {
                     xtype: 'button',
                     action: 'carrello',
                     align: 'right',
-                    iconCls: 'iconBasketFull',
-                    tooltip: 'carrello'
+                    //iconCls: 'iconBasketFull',
+                    text: 'Carrello'
 
                 }
             ]

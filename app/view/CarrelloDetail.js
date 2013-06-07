@@ -8,35 +8,83 @@
 Ext.define('GAS.view.CarrelloDetail', {
     extend: 'Ext.form.Panel',
     alias: 'widget.CarrelloDetail',
-    //xtype: 'fornitoridetail',
+    id: 'carrellodetail',
     config: {
-        layout: 'auto',
+        fullscreen: true,
         items: [
             {
-                xtype: 'textfield',
-                name: 'Titolo',
-                label: 'Titolo'
+                xtype: 'fieldset',
+                title: 'Dettaglio Prodotto',
+                items: [
+                    {
+                        xtype: 'textfield',
+                        name: 'Titolo',
+                        label: 'Titolo:',
+                        disabled: false,
+                        //value: 'titolo',
+                        id: 'titolo'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'IDProdotto',
+                        label: 'IDProdotto:',
+                        hidden: true,
+                        //value: 123,
+                        id: 'idprodotto'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'Descrizione',
+                        label: 'Descrizione:',
+                        hidden: true,
+                        //value: 'descr',
+                        id: 'descrizione'
+                    },
+                    {
+                        xtype: 'spinnerfield',
+                        name: 'Quantita',
+                        label: 'Quantità da ordinare:',
+                        minValue: 1,
+                        maxValue: 100,
+                        increment: 1,
+                        cycle: true,
+                        defaultValue: 1,
+                        stepValue: 1,
+                        padding: 10
+
+                    }
+                ] // items
             },
             {
-                xtype: 'textfield',
-                name: 'Descrizione',
-                label: 'Descrizione'
+                xtype: 'toolbar',
+                layout: 'hbox',
+                ui: 'plain',
+                items: [
+                    {
+                        xtype: 'button',
+                        //text: 'Salva',
+                        iconCls: 'action',
+                        ui: 'confirm',
+                        action: 'updateToCarrello'
+                    },
+                    {
+                        xtype: 'button',
+                        //text: 'Cancella',
+                        iconCls: 'trash',
+                        ui: 'decline',
+                        action: 'deleteToCarrello'
+                    }
+//                    ,
+//                    {
+//                        xtype: 'button',
+//                        //text: 'Indietro',
+//                        iconCls: 'reply',
+//                        ui: 'normal',
+//                        action: 'backToCarrello'
+//                    }
+                ] // items (toolbar)
             }
-        ]
-
-        //html: 'Hello Word!'
-        /*tBar: {
-         ui: 'light',
-         docked: 'top',
-         height: 40,
-         items: [
-         {
-         xtype: 'button',
-         text: 'Prodotti',
-         action: 'prodotti'
-         }
-         ]
-         }*/
+        ] // items (formpanel)
     }
 });
 
