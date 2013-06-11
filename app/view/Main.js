@@ -45,7 +45,11 @@ Ext.define('GAS.view.Main', {
                 xtype: 'Login',
                 title: 'Ordini',
                 iconCls: 'search',
-                cls: 'search'
+                cls: 'search',
+                //the badgetext configuration allows us to add a badge/tooltip onto the tab
+                //this is useful when you want to notify users of new content in an unactive tab
+                badgeText: null
+
             },
             // ActiveItem(2)
             {

@@ -28,6 +28,6 @@ Ext.define('GAS.view.CarrelloList', {
         emptyText: '</pre><div class="carrello-vuoto">Carrello vuoto.</div><pre>',
         onItemDisclosure: true,
         //itemTpl: '<table><tr><td width="400">{Titolo}</td><td width="100" style="text-align:right">{Quantita}</td></tr></table>'
-        itemTpl: '</pre><div class="list-item-fornitore">{Fornitore}</div><div class="list-item-prodotto"><table><tr><td width="400">{Titolo}</td><td width="100" style="text-align:right">{Quantita}</td></tr></table></div><pre>'
+        itemTpl: '</pre><div class="list-item-fornitore">{Fornitore}</div><div class="list-item-prodotto"><table><tr><td width="400">{Titolo}</td><td width="20" style="text-align:right">Qtà</td><td width="100" style="text-align:right">{Quantita}</td><td width="100" style="text-align:right">Importo</td><td width="100" style="text-align:right">{Importo}</td><td>&#128;</td></tr></table></div><pre>'
     }
 });

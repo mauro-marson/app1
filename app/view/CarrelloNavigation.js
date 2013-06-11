@@ -25,17 +25,28 @@ Ext.define('GAS.view.CarrelloNavigation', {
                 },
                 {
                     xtype: 'button',
+                    action: 'confirm',
+                    align: 'right',
+                    iconCls: 'action',
+                    ui: 'confirm',
+                    cls: 'action',
+                    hidden: true
+                },
+                {
+                    xtype: 'button',
                     action: 'refresh',
                     align: 'right',
                     iconCls: 'refresh',
-                    cls: 'refresh'
+                    cls: 'refresh',
+                    hidden: true
                 },
                 {
                     xtype: 'button',
                     action: 'trash',
                     align: 'right',
                     iconCls: 'trash',
-                    cls: 'trash'
+                    cls: 'trash',
+                    hidden: true
                 }
             ]
         },

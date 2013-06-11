@@ -41,6 +41,22 @@ Ext.define('GAS.view.CarrelloDetail', {
                         id: 'descrizione'
                     },
                     {
+                        xtype: 'numberfield',
+                        align: 'right',
+                        name: 'Prezzo',
+                        label: 'Prezzo:',
+                        disabled: false,
+                        id: 'prezzo'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        align: 'right',
+                        name: 'Importo',
+                        label: 'Importo:',
+                        hidden: true,
+                        id: 'importo'
+                    },
+                    {
                         xtype: 'spinnerfield',
                         name: 'Quantita',
                         label: 'Quantità da ordinare:',

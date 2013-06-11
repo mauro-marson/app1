@@ -20,6 +20,7 @@ Ext.define('GAS.controller.Ordini', {
             showCarrello: 'button[action=carrello]',
             refreshCarrello: 'button[action=refresh]',
             trashCarrello: 'button[action=trash]',
+            confirmCarrello: 'button[action=confirm]',
             discloseFornitori: 'FornitoriList',
             discloseCategorie: 'CategorieList',
             discloseProdotti: 'ProdottiList',
@@ -56,6 +57,9 @@ Ext.define('GAS.controller.Ordini', {
             },
             trashCarrello: {
                 tap: 'trashCarrello'
+            },
+            confirmCarrello: {
+                tap: 'confirmCarrello'
             },
             discloseFornitori: {
                 disclose: 'onDiscloseFornitori'
@@ -370,21 +374,22 @@ Ext.define('GAS.controller.Ordini', {
     },
     showLastActiveItem: function (button, e, options) {
         var main = button.getParent().getParent().getParent().getParent();
+        console.log(GAS.app.lastActiveItem);
         main.setActiveItem(GAS.app.lastActiveItem);
     },
     showCarrello: function (button, e, options) {
         //alert('userSetting');
         var main = button.getParent().getParent().getParent().getParent();
-
+        console.log(main.getActiveItem().id);
         var id = main.getActiveItem().id;
         var nr = null;
-        if (id == 'ext-FornitoriNavigation-1') {
+        if (id == 'ext-FornitoriNavigation-1' || id == 'fornitorinavigation') {
             nr = 2;
         }
-        if (id == 'ext-CategorieNavigation-1') {
+        if (id == 'ext-CategorieNavigation-1' || id == 'categorienavigation') {
             nr = 3;
         }
-        if (id == 'ext-ProdottiNavigation-1') {
+        if (id == 'ext-ProdottiNavigation-1' || id == 'prodottinavigation') {
             nr = 4;
         }
         GAS.app.lastActiveItem = nr;
@@ -397,7 +402,8 @@ Ext.define('GAS.controller.Ordini', {
             titolo = form.down('fieldset').down('#titolo'),
             fornitore = form.down('fieldset').down('#fornitore'),
             descrizione = form.down('fieldset').down('#descrizione'),
-            quantita = form.down('spinnerfield')
+            quantita = form.down('spinnerfield'),
+            prezzo = form.down('fieldset').down('#prezzo')
             ;
         var store = Ext.data.StoreManager.get('Carrello');
         store.add({
@@ -405,8 +411,25 @@ Ext.define('GAS.controller.Ordini', {
             IDProdotto: idProdotto.getValue(),
             Titolo: titolo.getValue(),
             Fornitore: fornitore.getValue(),
-            Quantita: quantita.getValue()
+            Quantita: quantita.getValue(),
+            Prezzo: prezzo.getValue(),
+            Importo: quantita.getValue() * prezzo.getValue()
         });
+        // aggiorna il badgeText come contatore righe ordine
+        var main = button.getParent().getParent().getParent();
+        var badge = main.getTabBar().items.items[1].getBadgeText();
+        badge = badge + 1;
+        main.getTabBar().items.items[1].setBadgeText(badge);
+        //console.log('test per badge');
+
+        // aggiorna lo stato dei pulsanti del carrello (invia, aggiorna, cancella)
+        var main = button.getParent().getParent().getParent();
+        var carrelloNavigation = main.items.items[8];
+        console.log(carrelloNavigation.getNavigationBar());
+        carrelloNavigation.getNavigationBar().items.items[2].items.items[0].show();
+        carrelloNavigation.getNavigationBar().items.items[2].items.items[1].show();
+        carrelloNavigation.getNavigationBar().items.items[2].items.items[2].show();
+
         var carrello = Ext.widget('CarrelloList');
         carrello.refresh();
         //Ext.Msg.alert('Prodotto aggiunto al carrello!');
@@ -419,6 +442,7 @@ Ext.define('GAS.controller.Ordini', {
     declineCarrello: function (button, e, options) {
         // Funzione utilizzata per passare dal carrello ai prodotti
         var parent = button.getParent().getParent().getParent();
+        console.log('from carrello to prodotti');
         parent.setActiveItem(4);
     },
     refreshCarrello: function (button, e, options) {
@@ -429,8 +453,33 @@ Ext.define('GAS.controller.Ordini', {
     trashCarrello: function (button, e, options) {
         store = Ext.data.StoreManager.get('Carrello');
         store.removeAll();
+
+        // aggiorna il badgeText come contatore righe ordine
+        var main = button.getParent().getParent().getParent().getParent();
+        main.getTabBar().items.items[1].setBadgeText(null);
+
+        // aggiorna lo stato dei pulsanti del carrello (invia, aggiorna, cancella)
+        //var main = button.getParent().getParent().getParent();
+        var carrelloNavigation = main.items.items[8];
+        console.log(carrelloNavigation.getNavigationBar());
+        carrelloNavigation.getNavigationBar().items.items[2].items.items[0].hide();
+        carrelloNavigation.getNavigationBar().items.items[2].items.items[1].hide();
+        carrelloNavigation.getNavigationBar().items.items[2].items.items[2].hide();
+
+
         var carrello = Ext.widget('CarrelloList');
         carrello.refresh();
+
+    },
+    confirmCarrello: function (button, e, options) {
+        var me = this;
+        Ext.Msg.confirm('Invio ordine', 'Conferma Invio?', function (btn) {
+            if (btn == 'yes') {
+                Ext.Msg.alert('Esito invio', 'Ti confermiamo che il tuo ordine è stato inviato, controlla la tua casella di posta.', Ext.emptyFn);
+                // se ok il carrello va cancellato
+                me.trashCarrello(button, e, options);
+            }
+        });
 
     },
     backToCarrello: function (button, e, options) {
@@ -442,9 +491,13 @@ Ext.define('GAS.controller.Ordini', {
     updateToCarrello: function (button, e, options) {
         // Funzione
         //alert('update');
+        console.log('update');
         var form = button.up('formpanel'),
             quantita = form.down('spinnerfield'),
-            record = form.getRecord();
+            prezzo = form.down('numberfield'),
+            importo = quantita.getValue() * prezzo.getValue();
+        form.items.items[0].items.items[4].setValue(importo);
+        var record = form.getRecord();
 
         form.updateRecord(record);
 
@@ -454,12 +507,29 @@ Ext.define('GAS.controller.Ordini', {
     deleteToCarrello: function (button, e, options) {
         // Funzione
         //alert('cancella');
-        var form = button.up('form');
+        var form = button.up('panel');
         var record = form.getRecord();
         var store = Ext.data.StoreManager.get('Carrello');
 
         store.remove(record);
         store.sync();
+
+        // aggiorna il badgeText come contatore righe ordine
+        var main = button.getParent().getParent().getParent();
+        var badge = main.getTabBar().items.items[1].getBadgeText();
+        badge = badge - 1;
+        main.getTabBar().items.items[1].setBadgeText(badge);
+        //console.log('test per badge');
+
+        // aggiorna lo stato dei pulsanti del carrello (invia, aggiorna, cancella)
+        //var main = button.getParent().getParent().getParent();
+        if (badge == 0) {
+            var carrelloNavigation = main.items.items[8];
+            console.log(carrelloNavigation.getNavigationBar());
+            carrelloNavigation.getNavigationBar().items.items[2].items.items[0].hide();
+            carrelloNavigation.getNavigationBar().items.items[2].items.items[1].hide();
+            carrelloNavigation.getNavigationBar().items.items[2].items.items[2].hide();
+        }
 
         var parent = button.getParent().getParent().getParent();
         parent.setActiveItem(7);
