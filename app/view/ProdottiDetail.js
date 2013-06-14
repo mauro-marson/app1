@@ -55,6 +55,13 @@ Ext.define('GAS.view.ProdottiDetail', {
                         id: 'descrizione'
                     },
                     {
+                        xtype: 'textfield',
+                        name: 'CodiceProdotto',
+                        label: 'CodiceProdotto:',
+                        hidden: true,
+                        id: 'codiceProdotto'
+                    },
+                    {
                         xtype: 'numberfield',
                         align: 'right',
                         name: 'Prezzo',

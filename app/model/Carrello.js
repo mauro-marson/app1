@@ -18,13 +18,18 @@ Ext.define('GAS.model.Carrello', {
 
     config: {
         fields: [
-            { name: 'UserName', type: 'string' },
-            { name: 'Fornitore', type: 'string' },
-            { name: 'IDProdotto', type: 'int' },
-            { name: 'Titolo', type: 'string' },
-            { name: 'Quantita', type: 'int' },
-            { name: 'Prezzo', type: 'double' },
-            { name: 'Importo', type: 'double' }
+            //{ name: 'IDDettagliOrdine', type: 'int' },    // autoincrement
+            { name: 'Codice', type: 'string' },             // codice prodotto
+            { name: 'Titolo', type: 'string' },             // titolo prodotto
+            { name: 'DescrizioneBreve', type: 'string' },   // descrizione
+            { name: 'Prezzo', type: 'double' },             // prezzo
+            { name: 'DataIns', type: 'date', dateFormat: 'Y-m-d H:i:s'},  // data inserimento
+            { name: 'OperatoreIns', type: 'string' },       // UserName
+            { name: 'IDProdotto', type: 'int' },            // id prodotto
+            { name: 'Quantity', type: 'int' },              // quantità
+            { name: 'IDOrdine', type: 'int' },              // null
+            { name: 'Fornitore', type: 'string' },          // fornitore
+            { name: 'Importo', type: 'double' }             // importo
         ],
         proxy: {
             type: 'ajax',

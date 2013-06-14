@@ -81,6 +81,9 @@ Ext.application({
         'Tablet'
     ],
 
+    requires: [
+        'Ext.MessageBox'
+    ],
     //autoCreateViewport	: false,
 
     launch: function () {

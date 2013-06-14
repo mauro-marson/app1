@@ -327,6 +327,7 @@ Ext.define('GAS.controller.Ordini', {
         // qui si deve caricare la form del dettaglio
         var form = parent.down('#prodottidetail');
         form.setRecord(record);
+        console.log('record prodotti: ', record);
         form.down('spinnerfield').setValue(1);
 
         form.down('#username').setValue(GAS.app.userName);
@@ -401,18 +402,25 @@ Ext.define('GAS.controller.Ordini', {
         var idProdotto = form.down('fieldset').down('#idprodotto'),
             titolo = form.down('fieldset').down('#titolo'),
             fornitore = form.down('fieldset').down('#fornitore'),
-            descrizione = form.down('fieldset').down('#descrizione'),
+            descrizioneBreve = form.down('fieldset').down('#descrizione'),
             quantita = form.down('spinnerfield'),
-            prezzo = form.down('fieldset').down('#prezzo')
+            prezzo = form.down('fieldset').down('#prezzo'),
+            codiceProdotto = form.down('fieldset').down('#codiceProdotto')
+
             ;
         var store = Ext.data.StoreManager.get('Carrello');
         store.add({
-            UserName: GAS.app.userName,
-            IDProdotto: idProdotto.getValue(),
+            Codice: codiceProdotto.getValue(),
             Titolo: titolo.getValue(),
-            Fornitore: fornitore.getValue(),
-            Quantita: quantita.getValue(),
+            DescrizioneBreve: descrizioneBreve.getValue(),
             Prezzo: prezzo.getValue(),
+            //DataIns: Ext.Date.now(),
+            DataIns: new Date(),
+            OperatoreIns: GAS.app.userName,
+            IDProdotto: idProdotto.getValue(),
+            Quantity: quantita.getValue(),
+            IDOrdine: null,
+            Fornitore: fornitore.getValue(),
             Importo: quantita.getValue() * prezzo.getValue()
         });
         // aggiorna il badgeText come contatore righe ordine
@@ -473,13 +481,38 @@ Ext.define('GAS.controller.Ordini', {
     },
     confirmCarrello: function (button, e, options) {
         var me = this;
-        Ext.Msg.confirm('Invio ordine', 'Conferma Invio?', function (btn) {
-            if (btn == 'yes') {
-                Ext.Msg.alert('Esito invio', 'Ti confermiamo che il tuo ordine è stato inviato, controlla la tua casella di posta.', Ext.emptyFn);
-                // se ok il carrello va cancellato
-                me.trashCarrello(button, e, options);
-            }
+
+        /*        Ext.Msg.show({
+         title: 'Invio ordine',
+         message: 'Conferma Invio?',
+         width: 500,
+         buttons: Ext.MessageBox.YESNO,
+         iconCls: Ext.MessageBox.INFO,
+         fn: function(buttonId) {
+         if (buttonId == 'yes') {
+         console.log('hai premuto yes');
+         var store = Ext.data.StoreManager.get('Carrello');
+         store.sync({
+         scope: me,
+         success: me.proxySuccess,
+         failure: me.proxyFailure,
+         callback: me.proxyCallback
+         });
+         // se ok il carrello va cancellato
+         me.trashCarrello(button, e, options);
+         }
+         }
+         });*/
+
+        var store = Ext.data.StoreManager.get('Carrello');
+        store.sync({
+            scope: me,
+            success: me.proxySuccess,
+            failure: me.proxyFailure,
+            callback: me.proxyCallback
         });
+        // se ok il carrello va cancellato
+        //me.trashCarrello(button, e, options);
 
     },
     backToCarrello: function (button, e, options) {
@@ -599,6 +632,45 @@ Ext.define('GAS.controller.Ordini', {
         //this.getStore().clearFilter();
         store.clearFilter();
 
+    },
+
+    proxySuccess: function (record, operation) {
+        switch (operation.getAction()) {
+            case 'create':
+                console.log('From the server: Created the ' + record.get('UserName') + ' ordine.');
+                Ext.Msg.alert('Esito invio', 'Ti confermiamo che il tuo ordine è stato inviato, controlla la tua casella di posta.', Ext.emptyFn);
+                break;
+            case 'read':
+                console.log('From the server: Loaded the ' + record.get('UserName') + ' ordine.');
+                break;
+            case 'update':
+                console.log('From the server: Updated the ' + record.get('UserName') + ' ordine.');
+                break;
+            case 'destroy':
+                console.log('From the server: Erased the ' + record.get('UserName') + ' ordine.');
+                break;
+        }
+    },
+
+    proxyFailure: function (record, operation) {
+        switch (operation.getAction()) {
+            case 'create':
+                console.log('From the server: Failed to create ordine.');
+                break;
+            case 'read':
+                console.log('From the server: Failed to read ordine.');
+                break;
+            case 'update':
+                console.log('From the server: Failed to update ordine.');
+                break;
+            case 'destroy':
+                console.log('From the server: Failed to erase ordine.');
+                break;
+        }
+    },
+
+    proxyCallback: function (record, operation) {
+        console.log('This function is always invoked, regardless of success or failure');
     }
 
 });
