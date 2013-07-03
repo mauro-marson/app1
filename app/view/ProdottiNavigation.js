@@ -32,8 +32,23 @@ Ext.define('GAS.view.ProdottiNavigation', {
                     hidden: true,
                     id: 'fornitore'
 
-                }
-                ,
+                },
+                {
+                    xtype: 'numberfield',
+                    //text: 'Fornitori',
+                    disabled: true,
+                    hidden: true,
+                    id: 'idFornitore'
+
+                },
+                {
+                    xtype: 'numberfield',
+                    //text: 'Fornitori',
+                    disabled: true,
+                    hidden: true,
+                    id: 'idUtente'
+
+                },
                 {
                     xtype: 'spacer'
                 },

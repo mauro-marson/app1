@@ -257,6 +257,8 @@ Ext.define('GAS.controller.Ordini', {
 
         var key = record.get('IDNegozio');
         var fornitore = record.get('Titolo');
+        var idFornitore = key;
+        var idUtente = 69;
         var where = 'IDNegozio=' + key;
         //var model= storeCategorie.getModel();
         //var proxy= model.getProxy();
@@ -276,6 +278,8 @@ Ext.define('GAS.controller.Ordini', {
 
                         var container = parent.down('#categorienavigation');
                         container.down('#fornitore').setValue(fornitore);
+                        container.down('#idFornitore').setValue(idFornitore);
+                        container.down('#idUtente').setValue(idUtente);
 
                         parent.setActiveItem(3);
 
@@ -305,11 +309,15 @@ Ext.define('GAS.controller.Ordini', {
                         //alert('prodotti caricati');
                         var panel = view.getParent(),
                             parent = panel.getParent(),
-                            fornitore = panel.down('#fornitore').getValue()
+                            fornitore = panel.down('#fornitore').getValue(),
+                            idFornitore = panel.down('#idFornitore').getValue(),
+                            idUtente = panel.down('#idUtente').getValue()
                             ;
 
                         var container = parent.down('#prodottinavigation');
                         container.down('#fornitore').setValue(fornitore);
+                        container.down('#idFornitore').setValue(idFornitore);
+                        container.down('#idUtente').setValue(idUtente);
 
                         parent.setActiveItem(4);
 
@@ -322,7 +330,10 @@ Ext.define('GAS.controller.Ordini', {
     onDiscloseProdotti: function (view, record, target, index, event) {
         var panel = view.getParent(),
             parent = panel.getParent(),
-            fornitore = panel.down('#fornitore').getValue()
+            fornitore = panel.down('#fornitore').getValue(),
+            idFornitore = panel.down('#idFornitore').getValue(),
+            idUtente = panel.down('#idUtente').getValue()
+
             ;
         // qui si deve caricare la form del dettaglio
         var form = parent.down('#prodottidetail');
@@ -332,6 +343,8 @@ Ext.define('GAS.controller.Ordini', {
 
         form.down('#username').setValue(GAS.app.userName);
         form.down('#fornitore').setValue(fornitore);
+        form.down('#idFornitore').setValue(idFornitore);
+        form.down('#idUtente').setValue(idUtente);
 
         parent.setActiveItem(5);
         //parent.resetActiveItem();
@@ -405,7 +418,9 @@ Ext.define('GAS.controller.Ordini', {
             descrizioneBreve = form.down('fieldset').down('#descrizione'),
             quantita = form.down('spinnerfield'),
             prezzo = form.down('fieldset').down('#prezzo'),
-            codiceProdotto = form.down('fieldset').down('#codiceProdotto')
+            codiceProdotto = form.down('fieldset').down('#codiceProdotto'),
+            idUtente = form.down('fieldset').down('#idUtente'),
+            idFornitore = form.down('fieldset').down('#idFornitore')
 
             ;
         var store = Ext.data.StoreManager.get('Carrello');
@@ -421,7 +436,9 @@ Ext.define('GAS.controller.Ordini', {
             Quantity: quantita.getValue(),
             IDOrdine: null,
             Fornitore: fornitore.getValue(),
-            Importo: quantita.getValue() * prezzo.getValue()
+            Importo: quantita.getValue() * prezzo.getValue(),
+            IDFornitore: idFornitore.getValue(),
+            IDUtente: idUtente.getValue()
         });
         // aggiorna il badgeText come contatore righe ordine
         var main = button.getParent().getParent().getParent();
@@ -638,7 +655,7 @@ Ext.define('GAS.controller.Ordini', {
         switch (operation.getAction()) {
             case 'create':
                 console.log('From the server: Created the ' + record.get('UserName') + ' ordine.');
-                Ext.Msg.alert('Esito invio', 'Ti confermiamo che il tuo ordine è stato inviato, controlla la tua casella di posta.', Ext.emptyFn);
+                alert('Esito invio', 'Ti confermiamo che il tuo ordine è stato inviato, controlla la tua casella di posta.');
                 break;
             case 'read':
                 console.log('From the server: Loaded the ' + record.get('UserName') + ' ordine.');

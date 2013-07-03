@@ -29,7 +29,9 @@ Ext.define('GAS.model.Carrello', {
             { name: 'Quantity', type: 'int' },              // quantità
             { name: 'IDOrdine', type: 'int' },              // null
             { name: 'Fornitore', type: 'string' },          // fornitore
-            { name: 'Importo', type: 'double' }             // importo
+            { name: 'Importo', type: 'double' },            // importo
+            { name: 'IDUtente', type: 'int' },              // IDUtente
+            { name: 'IDFornitore', type: 'int' }            // IDFornitore
         ],
         proxy: {
             type: 'ajax',

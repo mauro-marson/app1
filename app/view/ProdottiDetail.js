@@ -80,6 +80,20 @@ Ext.define('GAS.view.ProdottiDetail', {
                         defaultValue: 1,
                         stepValue: 1,
                         padding: 10
+                    },
+                    {
+                        xtype: 'numberfield',
+                        name: 'IDFornitore',
+                        label: 'IDFornitore:',
+                        hidden: true,
+                        id: 'idFornitore'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        name: 'IDUtente',
+                        label: 'IDUtente:',
+                        hidden: true,
+                        id: 'idUtente'
                     }
                 ] // items
             },
