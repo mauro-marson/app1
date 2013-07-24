@@ -174,58 +174,105 @@ if (json_last_error() === JSON_ERROR_NONE) {
         foreach ($my_arr_fornitori as $result) {
 
             // VARIABILI DI LAVORO
-            $forn_value = $result['IDFornitore'];
+            //$forn_value = $result['IDFornitore'];
+            $forn_value = $result;
             echo '$forn_value: ' . $forn_value . "\n";
             $importoTotale = 0;
             $idOrdine = $idOrdine + 1;
 
             //ECHO_TEST
             echo "in questo momento stiamo analizzando il fornitore: " . $forn_value . "\n";
-            //$my_arr_dettaglio=array();
-            foreach ($my_arr as $result1) {
-                echo 'IDFornitore: ' . $result1['IDFornitore'] . "\n";
-                $forn_value1 = $result1['IDFornitore'];
-                echo "fornitore array dettaglio: " . $forn_value1 . "\n";
-                if ($result['IDFornitore'] == $forn_value) {
-                    $my_arr_dettaglio[] = $result1;
-                    echo $my_arr_dettaglio . "\n";
+
+
+
+            $my_arr_dettaglio=array();
+            foreach ($my_arr as $result => $value) {
+                if ($value['IDFornitore'] == $forn_value) {
+                    echo 'ok!!!!!!!!!!!!!!!!!!!!!!!!'."\n";
+                    // CARICO L'ARRAY PER GENERARE L'SQL
+                    $my_arr_dettaglio[] = $value;
                 }
             }
 
-            // CALCOLO IMPORTO TOTALE
-            foreach ($my_arr_dettaglio as $result2) {
-                $importoTotale = $importoTotale + $result2["Importo"];
+
+
+
+
+            echo 'ecco i dati che elaborerò per questo fornitore:' . "\n";
+            foreach ($my_arr_dettaglio as $key => $value) {
+                foreach($value as $k => $v) {
+                        echo 'key: '.$k.' - '.'value: '.$v."\n";
+                        // CALCOLO IMPORTO TOTALE
+                        if($k=='Importo'){
+                            $importoTotale = $importoTotale + $v;
+                        }
+                }
             }
-            echo "importo totale ordine: " . $importoTotale . "\n";
+
+
+            echo "importo totale ordine in esame: " . $importoTotale . "\n";
+
+// FINO A QUA TESTATO E FUNZIONANTE
+
+
+
 
             // *********************************************************************
             // OPERAZIONI PER RIGHE ORDINE
-            // ELIMINO I CAMPI NON NECESSARI PER LE SUCCESSIVE OPERAZIONI
-            unset($my_arr_dettaglio["Fornitore"]);
-            unset($my_arr_dettaglio["Importo"]);
-            unset($my_arr_dettaglio["id"]);
-            unset($my_arr_dettaglio["IDOrdine"]);
+            // campi necessari
+            //  IDDettagliOrdine
+            //  Codice
+            //  Titolo
+            //  DescrizioneBreve
+            //  Prezzo
+            //  DataIns
+            //  OperatoreIns
+            //  IDProdotto
+            //  Quantity
+            //  IDOrdine
 
-            // AGGIUNGO IL NUOVO IDORDINE
-            $my_arr_dettaglio["IDOrdine"] = $idOrdine;
+            echo('*** inizio costruzione istruzione SQL')."\n";
 
-            // CREO SINTASSI SQL PER RIGHE ORDINE
             foreach ($my_arr_dettaglio as $key => $value) {
-                $sql = (is_numeric($value)) ? "`$key` = $value" : "`$key` = '" . mysql_real_escape_string($value) . "'";
-                $sql = implode(",", $sql);
-                $sql_dettaglio = "INSERT INTO GASSTORE_tbldettagliordini SET $sql";
-                //ECHO_TEST
-                //echo "dettaglio SQL :".$sql_dettaglio."\n";
-                //die();
-                try {
-                    $rs = mysql_query($sql_dettaglio);
-                    echo $sql_dettaglio . "\n";
-                } catch (Exception $err) {
-                    $data = array('success' => false, 'message' => 'errore in istruzione SQL: ' . $sql_dettaglio);
-                    echo json_encode($data) . "\n";
+
+                echo 'qtà: ' .$value['Quantity']."\n";
+
+                $my_arr_SQL["IDOrdine"] = $idOrdine;
+                $my_arr_SQL["Quantity"] = $value['Quantity'];
+                $my_arr_SQL["Titolo"] = $value['Titolo'];
+
+
+                // CREO SINTASSI SQL PER RIGHE ORDINE
+                $sql1=null;
+                foreach ($my_arr_SQL as $key => $value) {
+                    echo 'key: '.$key.' - value: '.$value."\n";
+                    $sql = (is_numeric($value)) ? "`$key` = $value" : "`$key` = '" . mysql_real_escape_string($value) . "'";
+                    echo 'sql: '.$sql."\n";
+                    //$sql1 = implode(",", $sql);
+                    if(is_null($sql1)){
+                        $sql1 = $sql;
+                    }
+                    else {
+                    $sql1 = $sql1.','.$sql;
+                    }
+                    echo 'sql1: '.$sql1."\n";
                 }
+            $sql_dettaglio = 'INSERT INTO GASSTORE_tbldettagliordini SET '.$sql1;
+            echo "dettaglio SQL :".$sql_dettaglio."\n";
+            die();
+
+                            try {
+                                $rs = mysql_query($sql_dettaglio);
+
+                            } catch (Exception $err) {
+                                $data = array('success' => false, 'message' => 'errore in istruzione SQL: ' . $sql_dettaglio);
+
+                            }
             }
 
+
+die();
+if(1==2) {
             // *********************************************************************
             // OPERAZIONI PER TESTATE ORDINE
             // carico variabili di appoggio
@@ -279,6 +326,7 @@ if (json_last_error() === JSON_ERROR_NONE) {
             // Eseguo COMIT
 
             mysqli_commit($db_handle);
+        }
         }
 
         /* Rollback */
