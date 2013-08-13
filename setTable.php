@@ -51,7 +51,7 @@ function arrayUnique($array, $preserveKeys = false) {
     foreach ($array as $key => $item) {
         //$xx = array_values($item);
         $xx=$item;
-        echo '$xx: ' .$xx."\n";
+        //echo '$xx: ' .$xx."\n";
         if (!in_array($xx, $arrayHashes)) {
             $arrayHashes[] = $xx;
             // Add element to the unique Array
@@ -59,7 +59,7 @@ function arrayUnique($array, $preserveKeys = false) {
                 $arrayRewrite[$key] = $item;
             } else {
                 $arrayRewrite[] = $item;
-                echo "sono in arrayrewrite false"."\n";
+                //echo "sono in arrayrewrite false"."\n";
             }
         }
     }
@@ -87,32 +87,32 @@ if (json_last_error() === JSON_ERROR_NONE) {
 
     //var_dump($my_arr);
     if (array_key_exists('IDUtente', $my_arr)) {
-        echo "The 'IDUtente' element is in the array\n";
+        //echo "The 'IDUtente' element is in the array\n";
         $my_arr[]=$my_arr;
     } else {
-        echo "The 'IDUtente' element not is in the array\n";
+        //echo "The 'IDUtente' element not is in the array\n";
     }
 
     $my_new_arr=array();
     foreach ($my_arr as $key => $value) {
-        echo $key . ':' . $value . "\n";
+        //echo $key . ':' . $value . "\n";
         foreach ($value as $k => $v) {
-            echo 'k:'.$k . '-' .'v:'. $v . "\n";
+            //echo 'k:'.$k . '-' .'v:'. $v . "\n";
             //$my_new_arr[]=$value;
         }
     }
 
-    echo '*** fine contenuto my_arr ***' . "\n";
+    //echo '*** fine contenuto my_arr ***' . "\n";
 
-    $db_handle = mysql_connect($server, $user_name, $password);
-    $db_found = mysql_select_db($database, $db_handle);
+    $db_handle = mysqli_connect($server, $user_name, $password);
+    $db_found = mysqli_select_db($db_handle, $database);
     if ($db_found) {
         /* set autocommit to off */
         mysqli_autocommit($db_handle, FALSE);
 
         // RICAVO IL MAX IDORDINE
-        $rs = mysql_query("select max(IDOrdine) as id from GASSTORE_tblordini");
-        while ($row = mysql_fetch_assoc($rs)) {
+        $rs = mysqli_query($db_handle, "select max(IDOrdine) as id from GASSTORE_tblordini");
+        while ($row = mysqli_fetch_assoc($rs)) {
             $idOrdine = $row['id'];
         }
 
@@ -125,45 +125,37 @@ if (json_last_error() === JSON_ERROR_NONE) {
         //$my_arr_fornitori1 = array();
 
         //global $my_arr_fornitori1;
-        //ECHO_TEST
-        //$data = array('success' => true, 'data' => $my_arr_fornitori);
-        //echo json_encode($data);
-        //die();
+
         // ELIMINO I CAMPI NON NECESSARI PER LE SUCCESSIVE OPERAZIONI
         foreach ($my_arr as $key => $value) {
             foreach ($value as $k => $v) {
 
                 if($k=='IDFornitore') {
-                    echo 'value[IDFornitore] di my_arr: ' . $v . "\n";
+                    //echo 'value[IDFornitore] di my_arr: ' . $v . "\n";
                     $my_arr_fornitori[] = $v;
                 }
             }
         }
 
         // ORDINA L'ARRAY PER FORNITORE
-        echo '******** inizio array fornitori ordinato ********' . "\n";
+        //echo '******** inizio array fornitori ordinato ********' . "\n";
         sort($my_arr_fornitori);
-        echo 'my_arr_fornitori ordinato per IDFornitore contiene:' . "\n";
+        //echo 'my_arr_fornitori ordinato per IDFornitore contiene:' . "\n";
         foreach ($my_arr_fornitori as $key => $value) {
-            echo $key .':'.$value . "\n";
+            //echo $key .':'.$value . "\n";
         }
-         echo '******** fine array fornitori ordinato ********' . "\n";
+         //echo '******** fine array fornitori ordinato ********' . "\n";
 
         // ELIMINA GLI ELEMENTI DOPPI
-        echo '******** inizio array fornitori per eliminazione doppioni ********' . "\n";
+        //echo '******** inizio array fornitori per eliminazione doppioni ********' . "\n";
         //$my_arr_fornitori = array();
         $my_arr_fornitori = arrayUnique($my_arr_fornitori);
 
-        //ECHO_TEST
-        //$data = array('success' => true, 'data' => $my_arr_fornitori);
-        //echo json_encode($data);
-        //die();
-
-        echo 'my_arr_fornitori contiene:' . "\n";
+        //echo 'my_arr_fornitori contiene:' . "\n";
         foreach ($my_arr_fornitori as $value) {
-            echo $value . "\n";
+            //echo $value . "\n";
         }
-        echo '******** fine array fornitori  per eliminazione doppioni ********' . "\n";
+        //echo '******** fine array fornitori  per eliminazione doppioni ********' . "\n";
 
         // ************************************************************************
         // CICLO PER ESTRAZIONE RIGHE ORDINI PER FORNITORE
@@ -176,19 +168,19 @@ if (json_last_error() === JSON_ERROR_NONE) {
             // VARIABILI DI LAVORO
             //$forn_value = $result['IDFornitore'];
             $forn_value = $result;
-            echo '$forn_value: ' . $forn_value . "\n";
+            //echo '$forn_value: ' . $forn_value . "\n";
             $importoTotale = 0;
             $idOrdine = $idOrdine + 1;
 
             //ECHO_TEST
-            echo "in questo momento stiamo analizzando il fornitore: " . $forn_value . "\n";
+            //echo "in questo momento stiamo analizzando il fornitore: " . $forn_value . "\n";
 
 
 
             $my_arr_dettaglio=array();
             foreach ($my_arr as $result => $value) {
                 if ($value['IDFornitore'] == $forn_value) {
-                    echo 'ok!!!!!!!!!!!!!!!!!!!!!!!!'."\n";
+                    //echo 'ok!!!!!!!!!!!!!!!!!!!!!!!!'."\n";
                     // CARICO L'ARRAY PER GENERARE L'SQL
                     $my_arr_dettaglio[] = $value;
                 }
@@ -198,10 +190,10 @@ if (json_last_error() === JSON_ERROR_NONE) {
 
 
 
-            echo 'ecco i dati che elaborerò per questo fornitore:' . "\n";
+            //echo 'ecco i dati che elaborerò per questo fornitore:' . "\n";
             foreach ($my_arr_dettaglio as $key => $value) {
                 foreach($value as $k => $v) {
-                        echo 'key: '.$k.' - '.'value: '.$v."\n";
+                        //echo 'key: '.$k.' - '.'value: '.$v."\n";
                         // CALCOLO IMPORTO TOTALE
                         if($k=='Importo'){
                             $importoTotale = $importoTotale + $v;
@@ -210,12 +202,7 @@ if (json_last_error() === JSON_ERROR_NONE) {
             }
 
 
-            echo "importo totale ordine in esame: " . $importoTotale . "\n";
-
-// FINO A QUA TESTATO E FUNZIONANTE
-
-
-
+            //echo "importo totale ordine in esame: " . $importoTotale . "\n";
 
             // *********************************************************************
             // OPERAZIONI PER RIGHE ORDINE
@@ -231,23 +218,28 @@ if (json_last_error() === JSON_ERROR_NONE) {
             //  Quantity
             //  IDOrdine
 
-            echo('*** inizio costruzione istruzione SQL')."\n";
+            //echo('*** inizio costruzione istruzione SQL')."\n";
+            $my_arr_SQL=array();
 
             foreach ($my_arr_dettaglio as $key => $value) {
 
-                echo 'qtà: ' .$value['Quantity']."\n";
+                //echo 'qtà: ' .$value['Quantity']."\n";
 
                 $my_arr_SQL["IDOrdine"] = $idOrdine;
                 $my_arr_SQL["Quantity"] = $value['Quantity'];
                 $my_arr_SQL["Titolo"] = $value['Titolo'];
+                $my_arr_SQL["IDProdotto"] = $value['IDProdotto'];
+                $my_arr_SQL["Prezzo"] = $value['Prezzo'];
+                $my_arr_SQL["DataIns"] = $value['DataIns'];
+                $my_arr_SQL["OperatoreIns"] = $value['OperatoreIns'];
 
 
                 // CREO SINTASSI SQL PER RIGHE ORDINE
                 $sql1=null;
                 foreach ($my_arr_SQL as $key => $value) {
-                    echo 'key: '.$key.' - value: '.$value."\n";
-                    $sql = (is_numeric($value)) ? "`$key` = $value" : "`$key` = '" . mysql_real_escape_string($value) . "'";
-                    echo 'sql: '.$sql."\n";
+                    //echo 'key: '.$key.' - value: '.$value."\n";
+                    $sql = (is_numeric($value)) ? "`$key` = $value" : "`$key` = '" . mysqli_real_escape_string($db_handle, $value) . "'";
+                    //echo 'sql: '.$sql."\n";
                     //$sql1 = implode(",", $sql);
                     if(is_null($sql1)){
                         $sql1 = $sql;
@@ -255,38 +247,38 @@ if (json_last_error() === JSON_ERROR_NONE) {
                     else {
                     $sql1 = $sql1.','.$sql;
                     }
-                    echo 'sql1: '.$sql1."\n";
+                    //echo 'sql1: '.$sql1."\n";
                 }
-            $sql_dettaglio = 'INSERT INTO GASSTORE_tbldettagliordini SET '.$sql1;
-            echo "dettaglio SQL :".$sql_dettaglio."\n";
-            die();
+                $sql_dettaglio = 'INSERT INTO GASSTORE_tbldettagliordini SET '.$sql1;
+                //echo "dettaglio SQL :".$sql_dettaglio."\n";
 
-                            try {
-                                $rs = mysql_query($sql_dettaglio);
+                //die();
 
-                            } catch (Exception $err) {
-                                $data = array('success' => false, 'message' => 'errore in istruzione SQL: ' . $sql_dettaglio);
-
-                            }
+                try {
+                    $rs = mysqli_query($db_handle, $sql_dettaglio);
+                    //echo "QUERY DETTAGLIO ESEGUITA ****" . "\n";
+                } catch (Exception $err) {
+                    $data = array('success' => false, 'message' => 'errore in istruzione SQL: ' . $sql_dettaglio);
+                }
             }
 
 
-die();
-if(1==2) {
+            //die();
+//if(1==2) {
             // *********************************************************************
             // OPERAZIONI PER TESTATE ORDINE
             // carico variabili di appoggio
-            $utente = $my_arr_dettaglio[1]['OperatoreIns'];
-            $fornitore = $my_arr_dettaglio[1]['Fornitore'];
-            $dataIns = $my_arr_dettaglio[1]['DataIns'];
-            $idUtente = $my_arr_dettaglio[1]['IDUtente'];
-            $idFornitore = $my_arr_dettaglio[1]['IDFornitore'];
+            $utente = $my_arr_dettaglio[0]['OperatoreIns'];
+            $fornitore = $my_arr_dettaglio[0]['Fornitore'];
+            $dataIns = $my_arr_dettaglio[0]['DataIns'];
+            $idUtente = $my_arr_dettaglio[0]['IDUtente'];
+            $idFornitore = $my_arr_dettaglio[0]['IDFornitore'];
 
             // creo l'array per la testata
             $date = date("Ymd");
             $time = time("hhmmss");
             $my_arr_testata = array();
-            $my_arr_testata = $my_arr_dettaglio;
+            //$my_arr_testata = $my_arr_dettaglio;
             //$my_arr_testata["IDOrdine"]
             $my_arr_testata["CodiceOrdine"] = "ORDM" . $date . $time;
             $my_arr_testata["Utente"] = $utente;
@@ -309,35 +301,47 @@ if(1==2) {
             $my_arr_testata["DataConferma"] = null;
             $my_arr_testata["OperatoreConferma"] = null;
 
+            // CREO SINTASSI SQL PER TESTATE ORDINE
+            $sql1=null;
             foreach ($my_arr_testata as $key => $value) {
-                $sql1 = (is_numeric($value)) ? "`$key` = $value" : "`$key` = '" . mysql_real_escape_string($value) . "'";
-                $sql1 = implode(",", $sql1);
-                $sql_testata = "INSERT INTO GASSTORE_tblordini SET $sql1";
-                try {
-                    $rs = mysql_query($sql_testata);
-                    echo $sql_testata . "\n";
-                } catch (Exception $err) {
-                    $data = array('success' => false, 'message' => 'errore in istruzione SQL: ' . $sql_testata);
-                    echo json_encode($data) . "\n";
+                $sql = (is_numeric($value)) ? "`$key` = $value" : "`$key` = '" . mysqli_real_escape_string($db_handle, $value) . "'";
+                //$sql1 = implode(",", $sql1);
+                if(is_null($sql1)){
+                    $sql1 = $sql;
                 }
+                else {
+                    $sql1 = $sql1.','.$sql;
+                }
+                //echo 'sql1: '.$sql1."\n";
             }
+            $sql_testata = "INSERT INTO GASSTORE_tblordini SET $sql1";
+            //echo "testata SQL :".$sql_testata."\n";
+            try {
+                $rs = mysqli_query($db_handle, $sql_testata);
+
+                //echo "QUERY TESTATA ESEGUITA ****" . "\n";
+            } catch (Exception $err) {
+                $data = array('success' => false, 'message' => 'errore in istruzione SQL: ' . $sql_testata);
+                //echo json_encode($data) . "\n";
+            }
+
 
             // *********************************************************************
             // Eseguo COMIT
 
             mysqli_commit($db_handle);
-        }
+//        }
         }
 
         /* Rollback */
         mysqli_rollback($db_handle);
-        mysql_close($db_handle);
+        mysqli_close($db_handle);
         $data = array('success' => true, 'message' => 'creato ordine nr. ' . $idOrdine);
         echo json_encode($data) . "\n";
     } else {
         $data = array('success' => false, 'message' => 'DATABASE NOT FOUND');
         echo json_encode($data) . "\n";
-        mysql_close($db_handle);
+        mysqli_close($db_handle);
     }
 } else {
           $data = array('success' => false, 'message' => 'not a valid json');

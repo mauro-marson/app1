@@ -522,14 +522,21 @@ Ext.define('GAS.controller.Ordini', {
          });*/
 
         var store = Ext.data.StoreManager.get('Carrello');
-        store.sync({
+
+        var obj = store.sync({
             scope: me,
             success: me.proxySuccess,
             failure: me.proxyFailure,
             callback: me.proxyCallback
         });
         // se ok il carrello va cancellato
-        //me.trashCarrello(button, e, options);
+        console.log(obj);
+        if (obj.added.length > 0) {
+            //alert('ordine inserito');
+            Ext.Msg.alert('ordine inserito!');
+            me.trashCarrello(button, e, options);
+        }
+
 
     },
     backToCarrello: function (button, e, options) {
