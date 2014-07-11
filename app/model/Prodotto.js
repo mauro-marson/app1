@@ -36,13 +36,17 @@ Ext.define('GAS.model.Prodotto', {
             { name: 'OperatoreMod', type: 'string' },
             { name: 'Ordine', type: 'int' },
             { name: 'IDCategoria', type: 'int' },
-            { name: 'IDStato', type: 'int' }
+            { name: 'IDStato', type: 'int' },
+            { name: 'LikeSum', type: 'int' },
+            { name: 'DislikeSum', type: 'int' },
+            { name: 'NrAcquisti', type: 'int' }
         ],
         proxy: {
             type: 'ajax',
             actionMethods: 'POST',
             extraParams: {
                 tableName: 'Prodotti',
+                select: '*',
                 orderBy: 'Titolo',
                 where: ''
             },
@@ -67,7 +71,7 @@ Ext.define('GAS.model.Prodotto', {
             },
             listeners: {
                 exception: function () {
-                    console.log("Exception on Fornitori");
+                    console.log("Exception on Prodotti");
                 }
             }
         }

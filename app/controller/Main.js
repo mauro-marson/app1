@@ -51,7 +51,7 @@ Ext.define('GAS.controller.Main', {
         });
 
 
-    },
+    }
     /*doLogin: function(button, e, options) {
      console.log('tap from login button from controller');
      var me = this;

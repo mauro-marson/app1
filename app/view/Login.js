@@ -27,6 +27,8 @@ Ext.define('GAS.view.Login', {
      */
     config: {
         layout: 'vbox',
+        pack: 'center',
+        align: 'center',
         items: [
 //            {
 //                docked: 'top',
@@ -49,13 +51,14 @@ Ext.define('GAS.view.Login', {
                 id: 'signInFailedLabel',
                 itemId: 'signInFailedLabel',
                 showAnimation: 'fadeIn',
-                style: 'color:#990000;margin:5px 0px;'
+                style: 'color:#990000;margin:5px 0px;',
+                height: 100
             },
-
             {
                 xtype: 'fieldset',
                 title: 'Login',
                 instructions: 'inserire entrambi i campi',
+                height: '175',
                 items: [
                     {
                         xtype: 'textfield',
@@ -65,7 +68,6 @@ Ext.define('GAS.view.Login', {
                         required: true,
                         placeHolder: 'Username',
                         value: 'mauro'
-
                     },
                     {
                         xtype: 'passwordfield',
@@ -74,7 +76,6 @@ Ext.define('GAS.view.Login', {
                         required: true,
                         placeHolder: 'Password',
                         value: 'marson'
-
                     }
                 ]
             },

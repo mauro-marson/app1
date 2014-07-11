@@ -36,7 +36,7 @@ Ext.define('GAS.view.Main', {
                     '<h1 style="text-align:center">Monastier di Treviso</h1>',
                     //"<p>Benvenuti in Gas Mobile!!</p>",
                     '<br>',
-                    '<h2 style="text-align:center">by <a href="http://www.mauromarson.eu" target="_blank">Mauro Marson</a></h2>'
+                    //'<h2 style="text-align:center">by <a href="http://www.mauromarson.eu" target="_blank">Mauro Marson</a></h2>'
                 ].join("")
             },
 

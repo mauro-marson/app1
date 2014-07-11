@@ -12,28 +12,34 @@ Ext.define('GAS.view.Contact', {
     config: {
         url: 'contact.php',
         layout: 'vbox',
+        height: 400,
         items: [
             {
                 xtype: 'fieldset',
                 title: 'Contact Us',
                 instructions: 'Email address is optional',
-
+                height: 300,
                 items: [
                     {
                         xtype: 'textfield',
                         label: 'Name',
-                        name: 'name'
+                        name: 'name',
+                        flex: 1
+                        //height: '10%'
                     },
                     {
                         xtype: 'emailfield',
                         label: 'Email',
-                        name: 'email'
+                        name: 'email',
+                        flex: 1
+                        //height: '10%'
                     },
                     {
                         xtype: 'textareafield',
                         label: 'Message',
                         name: 'message',
-                        height: 90
+                        flex: 1
+                        //height: '80%'
                     }
                 ]
             },

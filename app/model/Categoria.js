@@ -29,6 +29,7 @@ Ext.define('GAS.model.Categoria', {
             actionMethods: 'POST',
             extraParams: {
                 tableName: 'Categorie',
+                select: '*',
                 orderBy: 'Titolo',
                 where: ''
             },

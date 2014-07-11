@@ -37,6 +37,7 @@ Ext.define('GAS.model.Fornitore', {
             actionMethods: 'POST',
             extraParams: {
                 tableName: 'Negozi',
+                select: '*',
                 orderBy: 'Titolo',
                 where: null
             },

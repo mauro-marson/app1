@@ -146,7 +146,7 @@ Ext.define('GAS.controller.Ordini', {
         });
 
         Ext.Ajax.request({
-            url: '../../../mobile/app1/login.php',
+            url: '../../../app1/login.php',
             method: 'POST',
             root: 'data',
             params: {
@@ -197,6 +197,7 @@ Ext.define('GAS.controller.Ordini', {
             failure: function (response) {
                 me.sessionToken = null;
                 //me.signInFailure('Login failed. Please try again later.');
+                me.panel.setMasked(false);
             }
         });
 
@@ -219,7 +220,7 @@ Ext.define('GAS.controller.Ordini', {
 
 
         Ext.Ajax.request({
-            url: '../../../mobile/app1/logout.php',
+            url: '../../../app1/logout.php',
             method: 'POST',
             root: 'data',
             params: {
@@ -555,6 +556,7 @@ Ext.define('GAS.controller.Ordini', {
             importo = quantita.getValue() * prezzo.getValue();
         form.items.items[0].items.items[4].setValue(importo);
         var record = form.getRecord();
+        record.data.Quantity = quantita.getValue();
 
         form.updateRecord(record);
 

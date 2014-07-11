@@ -26,6 +26,32 @@ Ext.define('GAS.view.ProdottiList', {
         store: 'Prodotti',
         loadingText: "Loading...",
         onItemDisclosure: true,
-        itemTpl: '<table><tr><td><img src="http://www.gasmonastier.it/gasstore/allegati/{Image1}" height="50" width="100" /></td><td width="300" style="text-align:left">{Titolo}</td><td width="100" style="text-align:right">Prezzo</td><td width="100" style="text-align:right">{Prezzo}</td><td>&#128;</td></tr></table>'
+        itemTpl: '' +
+            '<table>' +
+            '<tr>' +
+            '<td width="100">' +
+            '<img src="http://www.gasmonastier.it/gasstore/allegati/{Image1}" height="50" width="50" />' +
+            '</td>' +
+            '<td width="300" style="text-align:left">{Titolo}</td>' +
+            '<td width="60" style="text-align:right">Prezzo</td>' +
+            '<td width="60" style="text-align:right">{Prezzo}</td>' +
+            '<td>&#128;</td>' +
+            '<td width="100" style="text-align:right">Nr acquisti</td>' +
+            '<td width="100" style="text-align:right">{NrAcquisti}</td>' +
+            //'<td width="150" style="text-align:right">Like</td>' +
+            '<td width="100">' +
+            '<img src="images/facebook_like.jpg" height="30" width="30" />' +
+            '</td>' +
+            '<td width="40" style="text-align:right">{Like}</td>' +
+            //'<td width="150" style="text-align:right">Dislike</td>' +
+            '<td width="100">' +
+            '<img src="images/facebook_dislike.jpg" height="30" width="30" />' +
+            '</td>' +
+            '<td width="40" style="text-align:right">{Dislike}</td>' +
+            '<td width="100" height="50">' +
+            '<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="100" data-height="50" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>' +
+            '</td>' +
+            '</tr>' +
+            '</table>'
     }
 });

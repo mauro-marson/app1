@@ -66,6 +66,11 @@ if ($db_found) {
         }
         mysql_close($db_handle);
     }
+    else {
+                    $data = array('success' => false, 'message' => 'credenziali errate: ' . $user . '*' . $pass);
+                    //session_destroy();
+                     echo json_encode($data);
+                }
 } else {
     $data = array('success' => false, 'message' => 'database non trovato');
     //session_destroy();

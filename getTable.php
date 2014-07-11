@@ -9,6 +9,7 @@ include 'checkSession.php';
 $table = strip_tags($_POST["tableName"]);
 $orderBy = strip_tags($_POST["orderBy"]);
 $where = strip_tags($_POST["where"]);
+$select = strip_tags($_POST["select"]);
 
 $db_handle = mysql_connect($server, $user_name, $password);
 $db_found = mysql_select_db($database, $db_handle);
@@ -16,25 +17,50 @@ $db_found = mysql_select_db($database, $db_handle);
 
 if ($db_found) {
 
-    //$SQL = "SELECT * FROM gasstore_tbl" . $table . " LIMIT 366";
+    //$SQL = "SELECT * FROM gasstore_tbl" . $table ;
     //$SQL = "SELECT * FROM gasstore_tbl" . $table . " order by IDProdotto";
-    $SQL = "SELECT * FROM GASSTORE_tbl" . $table;
+    $SQL = "SELECT ";
+
+// se tabella prodotti ricavo anche la sommatoria dei like/dislike e del nr acquisti globale
+    if($table=="Prodotti"){
+     $select="Codice, Titolo, Prezzo, Image1, sum(like_) as LikeSum, sum(dislike_) as DislikeSum";
+    }
+    if($select){
+        $SQL = $SQL . $select;
+    }
+    else {
+        $SQL = $SQL . "*";
+    }
+
+//$data = array('success' => false, 'message' => $SQL);
+//echo json_encode($data);
+//die();
+//test
+
+    $SQL = $SQL . " FROM GASSTORE_tbl" . $table;
+
+// se tabella prodotti ricavo anche la sommatoria dei like/dislike e del nr acquisti globale
+    if($table=="Prodotti"){
+        $SQL= $SQL . " left join gasstore_tblprodotti_like on Codice=codiceProdotto";
+        $orderBy="";
+    }
 
     if($where){
         $SQL = $SQL . ' where ' . $where;
-        }
+    }
     if($orderBy){
         $SQL = $SQL .' order by ' . $orderBy ;
-        }
+    }
+
+    if($table=="Prodotti"){
+        $SQL= $SQL . " group by Codice, Titolo, Prezzo, Image1";
+    }
 
     $result = mysql_query($SQL);
 
     $rows = array();
 
-//$data = array('success' => false, 'message' => $SQL);
-//    echo json_encode($data);
-//die();
-//test
+
 
     while ($db_field = mysql_fetch_assoc($result)) {
         /*

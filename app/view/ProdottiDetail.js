@@ -12,10 +12,14 @@ Ext.define('GAS.view.ProdottiDetail', {
     config: {
         fullscreen: true,
         store: 'Prodotti',
+        pack: 'center',
+        align: 'center',
+        layout: 'vbox',
         items: [
             {
                 xtype: 'fieldset',
                 title: 'Dettaglio Prodotti',
+                height: 400,
                 items: [
                     {
                         xtype: 'textfield',
@@ -51,7 +55,8 @@ Ext.define('GAS.view.ProdottiDetail', {
                         xtype: 'textfield',
                         name: 'Descrizione',
                         label: 'Descrizione:',
-                        hidden: true,
+                        hidden: false,
+                        disabled: true,
                         id: 'descrizione'
                     },
                     {

@@ -11,18 +11,22 @@ Ext.define('GAS.view.CarrelloDetail', {
     id: 'carrellodetail',
     config: {
         fullscreen: true,
+        height: 400,
+        layout: 'vbox',
         items: [
             {
                 xtype: 'fieldset',
                 title: 'Dettaglio Prodotto',
+                height: 300,
                 items: [
                     {
                         xtype: 'textfield',
                         name: 'Titolo',
                         label: 'Titolo:',
-                        disabled: false,
+                        disabled: true,
                         //value: 'titolo',
-                        id: 'titolo'
+                        id: 'titolo',
+                        flex: 1
                     },
                     {
                         xtype: 'textfield',
@@ -30,7 +34,8 @@ Ext.define('GAS.view.CarrelloDetail', {
                         label: 'IDProdotto:',
                         hidden: true,
                         //value: 123,
-                        id: 'idprodotto'
+                        id: 'idprodotto',
+                        flex: 1
                     },
                     {
                         xtype: 'textfield',
@@ -38,15 +43,17 @@ Ext.define('GAS.view.CarrelloDetail', {
                         label: 'Descrizione:',
                         hidden: true,
                         //value: 'descr',
-                        id: 'descrizione'
+                        id: 'descrizione',
+                        flex: 1
                     },
                     {
                         xtype: 'numberfield',
                         align: 'right',
                         name: 'Prezzo',
                         label: 'Prezzo:',
-                        disabled: false,
-                        id: 'prezzo'
+                        disabled: true,
+                        id: 'prezzo',
+                        flex: 1
                     },
                     {
                         xtype: 'numberfield',
@@ -54,7 +61,8 @@ Ext.define('GAS.view.CarrelloDetail', {
                         name: 'Importo',
                         label: 'Importo:',
                         hidden: true,
-                        id: 'importo'
+                        id: 'importo',
+                        flex: 1
                     },
                     {
                         xtype: 'spinnerfield',
@@ -66,7 +74,8 @@ Ext.define('GAS.view.CarrelloDetail', {
                         cycle: true,
                         defaultValue: 1,
                         stepValue: 1,
-                        padding: 10
+                        padding: 10,
+                        flex: 1
 
                     }
                 ] // items
